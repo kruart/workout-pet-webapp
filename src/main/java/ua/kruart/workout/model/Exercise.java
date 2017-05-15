@@ -97,4 +97,31 @@ public class Exercise {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Exercise exercise = (Exercise) o;
+
+        return id == exercise.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "id=" + id +
+                ", images=" + images +
+                ", conf=" + conf +
+                ", description=" + description +
+                ", approaches=" + approaches +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }
