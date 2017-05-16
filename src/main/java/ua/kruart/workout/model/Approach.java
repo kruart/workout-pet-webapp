@@ -7,12 +7,7 @@ import java.time.LocalTime;
  *
  * @author kruart on 14.05.2017.
  */
-public class Approach {
-
-    /**
-     * Unique entity identifier
-     */
-    private int id;
+public class Approach extends BaseEntity {
 
     /**
      * Repeats in one approach
@@ -37,19 +32,11 @@ public class Approach {
     public Approach() {}
 
     public Approach(int id, int repeats, float weight, float distance, LocalTime time) {
-        this.id = id;
+        super(id);
         this.repeats = repeats;
         this.weight = weight;
         this.distance = distance;
         this.time = time;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getRepeats() {
@@ -84,5 +71,13 @@ public class Approach {
         this.time = time;
     }
 
-
+    @Override
+    public String toString() {
+        return "Approach{" +
+                "repeats=" + repeats +
+                ", weight=" + weight +
+                ", distance=" + distance +
+                ", time=" + time +
+                '}';
+    }
 }

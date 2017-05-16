@@ -4,32 +4,33 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Created by kruart on 15.05.2017.
+ * It's entity describes workout which includes one or more exercises
+ *
+ * @author kruart on 15.05.2017.
  */
-public class Workout {
+public class Workout extends NamedEntity {
 
-    private int id;
-
+    /**
+     * Date when workout was started
+     */
     private LocalDateTime startWorkout;
 
+    /**
+     * Date when workout was ended
+     */
     private LocalDateTime endWorkout;
 
+    /**
+     * List of the exercises are included in workout
+     */
     private List<Exercise> exerciseList;
 
     public Workout() {}
 
-    public Workout(int id, List<Exercise> exerciseList) {
-        this.id = id;
+    public Workout(int id, String name, List<Exercise> exerciseList) {
+        super(id, name);
         this.exerciseList = exerciseList;
         this.startWorkout = LocalDateTime.now();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public LocalDateTime getStartWorkout() {
@@ -57,26 +58,9 @@ public class Workout {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Workout workout = (Workout) o;
-
-        return id == workout.id;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
-    }
-
-    @Override
     public String toString() {
         return "Workout{" +
-                "id=" + id +
-                ", startWorkout=" + startWorkout +
+                "startWorkout=" + startWorkout +
                 ", endWorkout=" + endWorkout +
                 ", exerciseList=" + exerciseList +
                 '}';

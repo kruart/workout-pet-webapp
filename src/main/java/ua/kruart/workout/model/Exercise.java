@@ -7,12 +7,7 @@ import java.util.List;
  *
  * @author kruart on 14.05.2017.
  */
-public class Exercise {
-
-    /**
-     * Unique entity identifier
-     */
-    private int id;
+public class Exercise extends BaseEntity {
 
     /**
      * Contains a list of paths to the exercise images
@@ -42,20 +37,12 @@ public class Exercise {
     public Exercise() {}
 
     public Exercise(int id, List<String> images, ExerciseConfiguration conf, ExerciseDescription description, List<Approach> approaches, String comment) {
-        this.id = id;
+        super(id);
         this.images = images;
         this.conf = conf;
         this.description = description;
         this.approaches = approaches;
         this.comment = comment;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public List<String> getImages() {
@@ -99,25 +86,9 @@ public class Exercise {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Exercise exercise = (Exercise) o;
-
-        return id == exercise.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
-    }
-
-    @Override
     public String toString() {
         return "Exercise{" +
-                "id=" + id +
-                ", images=" + images +
+                "images=" + images +
                 ", conf=" + conf +
                 ", description=" + description +
                 ", approaches=" + approaches +
