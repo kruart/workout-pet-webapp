@@ -1,5 +1,7 @@
 package ua.kruart.workout.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalTime;
 
 /**
@@ -7,6 +9,8 @@ import java.time.LocalTime;
  *
  * @author kruart on 14.05.2017.
  */
+@Table(name = "tbl_approach")
+@Entity
 public class Approach extends BaseEntity {
 
     /**

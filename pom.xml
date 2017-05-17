@@ -14,10 +14,20 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!--test-->
     <version.junit>4.12</version.junit>
+    <!--hibernate-->
+    <hibernate.version>5.2.8.Final</hibernate.version>
   </properties>
 
 
   <dependencies>
+
+    <!--JPA/Hibernate and Db's dependencies-->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

@@ -1,5 +1,7 @@
 package ua.kruart.workout.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -7,6 +9,8 @@ import java.util.List;
  *
  * @author kruart on 14.05.2017.
  */
+@Table(name = "tbl_exercise")
+@Entity
 public class Exercise extends BaseEntity {
 
     /**

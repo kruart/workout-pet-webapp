@@ -1,5 +1,6 @@
 package ua.kruart.workout.model;
 
+import javax.persistence.Embeddable;
 import java.util.Set;
 
 /**
@@ -7,6 +8,7 @@ import java.util.Set;
  *
  * @author kruart on 14.05.2017.
  */
+@Embeddable
 public class ExerciseDescription {
 
     /**

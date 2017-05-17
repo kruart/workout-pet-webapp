@@ -1,10 +1,13 @@
 package ua.kruart.workout.model;
 
+import javax.persistence.Embeddable;
+
 /**
  * Determines what configuration need for the {@link Exercise} object.
  *
  * @author kruart on 14.05.2017.
  */
+@Embeddable
 public class ExerciseConfiguration {
 
     private boolean weightMeaseare;

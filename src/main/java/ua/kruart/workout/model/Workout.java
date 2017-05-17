@@ -1,5 +1,7 @@
 package ua.kruart.workout.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,6 +10,8 @@ import java.util.List;
  *
  * @author kruart on 15.05.2017.
  */
+@Table(name = "tbl_workout")
+@Entity
 public class Workout extends NamedEntity {
 
     /**
