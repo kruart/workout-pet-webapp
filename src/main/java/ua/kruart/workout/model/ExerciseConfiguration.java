@@ -1,5 +1,6 @@
 package ua.kruart.workout.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -10,31 +11,38 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ExerciseConfiguration {
 
-    private boolean weightMeaseare;
+    @Column(name = "weightMeasure")
+    private boolean weightMeasure;
+
+    @Column(name = "timeMeasure")
     private boolean timeMeasure;
+
+    @Column(name = "repeatMeasure")
     private boolean repeatMeasure;
+
+    @Column(name = "distanceMeasure")
     private boolean distanceMeasure;
 
     public ExerciseConfiguration() {
-        weightMeaseare = true;
+        weightMeasure = true;
         repeatMeasure = true;
         timeMeasure = false;
         distanceMeasure = false;
     }
 
-    public ExerciseConfiguration(boolean weightMeaseare, boolean timeMeasure, boolean repeatMeasure, boolean distanceMeasure) {
-        this.weightMeaseare = weightMeaseare;
+    public ExerciseConfiguration(boolean weightMeasure, boolean timeMeasure, boolean repeatMeasure, boolean distanceMeasure) {
+        this.weightMeasure = weightMeasure;
         this.timeMeasure = timeMeasure;
         this.repeatMeasure = repeatMeasure;
         this.distanceMeasure = distanceMeasure;
     }
 
-    public boolean isWeightMeaseare() {
-        return weightMeaseare;
+    public boolean isWeightMeasure() {
+        return weightMeasure;
     }
 
-    public void setWeightMeaseare(boolean weightMeaseare) {
-        this.weightMeaseare = weightMeaseare;
+    public void setWeightMeasure(boolean weightMeasure) {
+        this.weightMeasure = weightMeasure;
     }
 
     public boolean isTimeMeasure() {
@@ -64,7 +72,7 @@ public class ExerciseConfiguration {
     @Override
     public String toString() {
         return "ExerciseConfiguration{" +
-                "weightMeaseare=" + weightMeaseare +
+                "weightMeasure=" + weightMeasure +
                 ", timeMeasure=" + timeMeasure +
                 ", repeatMeasure=" + repeatMeasure +
                 ", distanceMeasure=" + distanceMeasure +

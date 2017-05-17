@@ -1,7 +1,6 @@
 package ua.kruart.workout.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -14,47 +13,42 @@ import java.util.List;
 public class Exercise extends BaseEntity {
 
     /**
-     * Contains a list of paths to the exercise images
-     */
-    private List<String> images;
-
-    /**
      * Configuration of exercise measures(weight, distance, repeats, time)
      */
+    @Embedded
     private ExerciseConfiguration conf;
 
     /**
      * Description of the exercise
      */
+    @Embedded
     private ExerciseDescription description;
 
     /**
      * Describes each approach of the exercise
      */
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "exercise")
+    @OrderBy    //ordering by primary key is assumed
     private List<Approach> approaches;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "workout_id", nullable = false)
+    private Workout workout;
 
     /**
      * Comment of the exercise
      */
+    @Column(name = "comment")
     private String comment;
 
     public Exercise() {}
 
-    public Exercise(int id, List<String> images, ExerciseConfiguration conf, ExerciseDescription description, List<Approach> approaches, String comment) {
+    public Exercise(int id, ExerciseConfiguration conf, ExerciseDescription description, List<Approach> approaches, String comment) {
         super(id);
-        this.images = images;
         this.conf = conf;
         this.description = description;
         this.approaches = approaches;
         this.comment = comment;
-    }
-
-    public List<String> getImages() {
-        return images;
-    }
-
-    public void setImages(List<String> images) {
-        this.images = images;
     }
 
     public ExerciseConfiguration getConf() {
@@ -92,8 +86,7 @@ public class Exercise extends BaseEntity {
     @Override
     public String toString() {
         return "Exercise{" +
-                "images=" + images +
-                ", conf=" + conf +
+                "conf=" + conf +
                 ", description=" + description +
                 ", approaches=" + approaches +
                 ", comment='" + comment + '\'' +

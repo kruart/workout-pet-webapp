@@ -1,7 +1,6 @@
 package ua.kruart.workout.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,16 +16,19 @@ public class Workout extends NamedEntity {
     /**
      * Date when workout was started
      */
+    @Column(name = "startWorkout")
     private LocalDateTime startWorkout;
 
     /**
      * Date when workout was ended
      */
+    @Column(name = "endWorkout")
     private LocalDateTime endWorkout;
 
     /**
      * List of the exercises are included in workout
      */
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "workout")
     private List<Exercise> exerciseList;
 
     public Workout() {}

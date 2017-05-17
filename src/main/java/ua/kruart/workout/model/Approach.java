@@ -1,7 +1,6 @@
 package ua.kruart.workout.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalTime;
 
 /**
@@ -16,22 +15,30 @@ public class Approach extends BaseEntity {
     /**
      * Repeats in one approach
      */
+    @Column(name = "repeats")
     private int repeats;
 
     /**
      * Tonnage of the current approach
      */
+    @Column(name = "weight")
     private float weight;
 
     /**
      * Distance of the current approach
      */
+    @Column(name = "distance")
     private float distance;
 
     /**
      * Time of the current approach
      */
+    @Column(name = "time")
     private LocalTime time;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "exercise_id", nullable = false)
+    private Exercise exercise;
 
     public Approach() {}
 

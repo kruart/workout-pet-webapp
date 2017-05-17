@@ -1,7 +1,7 @@
 package ua.kruart.workout.model;
 
-import javax.persistence.Embeddable;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.Map;
 
 /**
  * Contains description of the {@link Exercise} object
@@ -12,60 +12,55 @@ import java.util.Set;
 public class ExerciseDescription {
 
     /**
-     * Target muscle of the exercise
+     * Target and additional muscles that are involved in the exercise
      */
-    private Muscle target_muscle;
-
-    /**
-     * Additional muscles that are involved in the exercise
-     */
-    private Set<Muscle> option_muscles;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "tbl_muscles", joinColumns = @JoinColumn(name = "exercise_id"))
+    @MapKeyColumn(name = "name", length = 50, nullable = false)
+    @MapKeyEnumerated(EnumType.STRING)
+    @Column(name = "working_muscle")
+    private Map<Muscle, String> muscles;
 
     /**
      * Type of complexity: Basic or Isolating
      */
+    @Column(name = "type", nullable = false)
     private String type;
 
     /**
      * Simple, Middle, Hard
      */
+    @Column(name = "complexity", nullable = false)
     private String complexity;
 
     /**
      * Name of the exercise
      */
+    @Column(name = "muscle_name", nullable = false)
     private String name;
 
     /**
      * Description of the exercise. How to do it correctly
      */
+    @Column(name = "description")
     private String description;
 
     public ExerciseDescription() {}
 
-    public ExerciseDescription(Muscle target_muscle, Set<Muscle> option_muscles, String type, String complexity, String name, String description) {
-        this.target_muscle = target_muscle;
-        this.option_muscles = option_muscles;
+    public ExerciseDescription(Map<Muscle, String> muscles, String type, String complexity, String name, String description) {
+        this.muscles = muscles;
         this.type = type;
         this.complexity = complexity;
         this.name = name;
         this.description = description;
     }
 
-    public Muscle getTarget_muscle() {
-        return target_muscle;
+    public Map<Muscle, String> getMuscles() {
+        return muscles;
     }
 
-    public void setTarget_muscle(Muscle target_muscle) {
-        this.target_muscle = target_muscle;
-    }
-
-    public Set<Muscle> getOption_muscles() {
-        return option_muscles;
-    }
-
-    public void setOption_muscles(Set<Muscle> option_muscles) {
-        this.option_muscles = option_muscles;
+    public void setMuscles(Map<Muscle, String> muscles) {
+        this.muscles = muscles;
     }
 
     public String getType() {
@@ -103,8 +98,7 @@ public class ExerciseDescription {
     @Override
     public String toString() {
         return "ExerciseDescription{" +
-                "target_muscle=" + target_muscle +
-                ", option_muscles=" + option_muscles +
+                "muscles=" + muscles +
                 ", type='" + type + '\'' +
                 ", complexity='" + complexity + '\'' +
                 ", name='" + name + '\'' +
