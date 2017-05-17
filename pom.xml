@@ -15,17 +15,45 @@
     <!--test-->
     <version.junit>4.12</version.junit>
     <!--hibernate-->
-    <hibernate.version>5.2.8.Final</hibernate.version>
+    <hibernate.version>5.2.3.Final</hibernate.version>
+
+    <postgresql.version>9.4.1210</postgresql.version>
   </properties>
 
 
   <dependencies>
 
     <!--JPA/Hibernate and Db's dependencies-->
+
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
       <version>${hibernate.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-tools</artifactId>
+      <version>5.2.3.Final</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-java8</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgresql.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.9.10</version>
     </dependency>
 
     <dependency>
