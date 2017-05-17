@@ -1,12 +1,17 @@
 package ua.kruart.workout.model;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
 /**
  * Base class for all business entities which contains name property
  *
  * @author kruart on 16.05.2017.
  */
+@MappedSuperclass
 public class NamedEntity extends BaseEntity {
 
+    @Column(name = "name", nullable = false)
     protected String name;
 
     public NamedEntity() {
