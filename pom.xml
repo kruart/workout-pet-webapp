@@ -14,17 +14,32 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!--test-->
     <version.junit>4.12</version.junit>
+
+    <!--spring-->
+    <spring.version>4.3.8.RELEASE</spring.version>
     <!--hibernate-->
     <hibernate.version>5.2.3.Final</hibernate.version>
-
+    <!--jdbc-driver-->
     <postgresql.version>9.4.1210</postgresql.version>
   </properties>
 
 
   <dependencies>
 
-    <!--JPA/Hibernate and Db's dependencies-->
+    <!--spring-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--JPA/Hibernate and Db's dependencies-->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
