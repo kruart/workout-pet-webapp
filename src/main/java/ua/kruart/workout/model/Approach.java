@@ -1,5 +1,7 @@
 package ua.kruart.workout.model;
 
+import ua.kruart.workout.model.base.BaseEntity;
+
 import javax.persistence.*;
 import java.time.LocalTime;
 
@@ -31,7 +33,7 @@ public class Approach extends BaseEntity {
     private float distance;
 
     /**
-     * Time of the current approach
+     * Time of execution a current approach
      */
     @Column(name = "time")
     private LocalTime time;

@@ -1,5 +1,7 @@
 package ua.kruart.workout.model;
 
+import ua.kruart.workout.model.base.BaseEntity;
+
 import javax.persistence.*;
 import java.util.List;
 

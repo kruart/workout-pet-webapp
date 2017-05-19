@@ -1,5 +1,7 @@
 package ua.kruart.workout.model;
 
+import ua.kruart.workout.model.base.NamedEntity;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ua.kruart.workout.model;
+package ua.kruart.workout.model.base;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
