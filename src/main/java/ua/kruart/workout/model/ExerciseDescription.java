@@ -1,6 +1,7 @@
 package ua.kruart.workout.model;
 
 import javax.persistence.*;
+
 import java.util.Map;
 
 /**
@@ -15,10 +16,10 @@ public class ExerciseDescription {
      * Target and additional muscles that are involved in the exercise
      */
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "tbl_muscles", joinColumns = @JoinColumn(name = "exercise_id"))
-    @MapKeyColumn(name = "name", length = 50, nullable = false)
+    @CollectionTable(name = "tbl_muscles", joinColumns = @JoinColumn(name = "exercise_id"), uniqueConstraints = {@UniqueConstraint(columnNames = {"exercise_id", "muscle_name"}, name = "working_muscle_unique_exercise_id_idx")})
+    @MapKeyColumn(name = "muscle_name", length = 50, nullable = false)
     @MapKeyEnumerated(EnumType.STRING)
-    @Column(name = "working_muscle")
+    @Column(name = "goal_of_working_muscle")   //main or optional
     private Map<Muscle, String> muscles;
 
     /**
@@ -36,7 +37,7 @@ public class ExerciseDescription {
     /**
      * Name of the exercise
      */
-    @Column(name = "muscle_name", nullable = false)
+    @Column(name = "exercise_name", nullable = false)
     private String name;
 
     /**
