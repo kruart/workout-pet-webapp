@@ -12,18 +12,18 @@ VALUES ('Вижигає біцепс', 'false', 'true', 'false', 'true', 'simple
 INSERT INTO public.tbl_exercise(comment, distancemeasure, repeatmeasure, timemeasure, weightmeasure, complexity, description, exercise_name, type, workout_id)
 VALUES ('зробити відкат, наст. разу', 'false', 'true', 'false', 'true', 'middle', 'Do it right!', 'Штанга на біцепс', 'Basic', 2);
 
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (3, 'main', 'muscle.chest');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (3, 'optional', 'muscle.shoulders');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (3, 'optional', 'muscle.trapezius');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (4, 'main', 'muscle.chest');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (4, 'optional', 'muscle.shoulders');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (4, 'optional', 'muscle.triceps');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (5, 'main', 'muscle.chest');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (5, 'optional', 'muscle.shoulders');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (6, 'main', 'muscle.biceps');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (6, 'optional', 'muscle.forearms');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (7, 'main', 'muscle.biceps');
-INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (7, 'optional', 'muscle.forearms');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (3, 'main', 'CHEST');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (3, 'optional', 'SHOULDERS');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (3, 'optional', 'TRAPEZIUS');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (4, 'main', 'CHEST');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (4, 'optional', 'SHOULDERS');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (4, 'optional', 'TRICEPS');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (5, 'main', 'CHEST');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (5, 'optional', 'SHOULDERS');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (6, 'main', 'BICEPS');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (6, 'optional', 'FOREARMS');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (7, 'main', 'BICEPS');
+INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (7, 'optional', 'FOREARMS');
 
 INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 15, null, 0, 3);
 INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 9, null, 0, 3);
