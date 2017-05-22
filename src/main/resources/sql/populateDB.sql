@@ -1,3 +1,9 @@
+DELETE FROM tbl_approach;
+DELETE FROM tbl_muscles;
+DELETE FROM tbl_exercise;
+DELETE FROM tbl_workout;
+ALTER SEQUENCE entity_id_seq RESTART WITH 1;
+
 INSERT INTO public.tbl_workout(name, startworkout, endworkout) VALUES ('chest', '2017-05-19 12:09:49', '2017-05-19 13:17:08');
 INSERT INTO public.tbl_workout(name, startworkout, endworkout) VALUES ('biceps', '2017-05-19 19:35:00', '2017-05-19 20:22:28');
 
