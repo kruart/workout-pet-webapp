@@ -16,12 +16,12 @@ public class BaseEntity {
     @Id
     @SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "entity_id_seq", name = "entity_id_seq")
     @GeneratedValue(generator="entity_id_seq", strategy=GenerationType.SEQUENCE)
-    private Integer id;
+    protected Integer id;
 
     public BaseEntity() {
     }
 
-    public BaseEntity(int id) {
+    protected BaseEntity(Integer id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class BaseEntity {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

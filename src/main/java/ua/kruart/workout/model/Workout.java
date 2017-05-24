@@ -30,15 +30,16 @@ public class Workout extends NamedEntity {
     /**
      * List of the exercises are included in workout
      */
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "workout")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "workout")
     private List<Exercise> exerciseList;
 
     public Workout() {}
 
-    public Workout(int id, String name, List<Exercise> exerciseList) {
+    public Workout(Integer id, String name, List<Exercise> exerciseList, LocalDateTime start, LocalDateTime end) {
         super(id, name);
         this.exerciseList = exerciseList;
-        this.startWorkout = LocalDateTime.now();
+        this.startWorkout = start;
+        this.endWorkout = end;
     }
 
     public LocalDateTime getStartWorkout() {
