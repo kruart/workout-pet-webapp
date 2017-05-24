@@ -10,10 +10,10 @@
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:sql/postgres.properties" system-properties-mode="OVERRIDE"/>
+
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
-        <jdbc:script location="classpath:sql/initDB_postgreSQL.sql"/>
+        <jdbc:script location="classpath:sql/${jdbc.initLocation}"/>
         <jdbc:script location="classpath:sql/populateDB.sql"/>
     </jdbc:initialize-database>
 
@@ -50,5 +50,13 @@
     <context:component-scan base-package="ua.kruart.workout.repository"/>
 
     <tx:annotation-driven/>
+
+    <beans profile="hsqldb">
+        <context:property-placeholder location="classpath:sql/hsqldb.properties" system-properties-mode="OVERRIDE"/>
+    </beans>
+
+    <beans profile="postgres">
+        <context:property-placeholder location="classpath:sql/postgres.properties" system-properties-mode="OVERRIDE"/>
+    </beans>
 
 </beans>
