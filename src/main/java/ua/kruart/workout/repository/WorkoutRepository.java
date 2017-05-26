@@ -14,22 +14,24 @@ public interface WorkoutRepository {
     /**
      * Saves(creates or modifies) specified workout instance
      * @param workout object which is necessary to save or update
+     * @return null if updated object is not found
      */
-    void save(Workout workout);
+    Workout save(Workout workout);
 
     /**
      * Returns workout with specified identifier. If no workout exists with such identifier
      * then null is returned
      * @param workoutId
-     * @return
+     * @return null if no found
      */
     Workout findById(int workoutId);
 
     /**
      * Delete workout with specified identifier
      * @param workoutId
+     * @return false if not found
      */
-    void delete(int workoutId);
+    boolean delete(int workoutId);
 
     /**
      * Returns all the workout objects
