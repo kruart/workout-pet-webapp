@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
  * @author kruart on 27.05.2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/spring-app.xml")
+@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
 @ActiveProfiles("hsqldb")
 @Sql(scripts = "classpath:sql/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class WorkoutServiceImplTest {
