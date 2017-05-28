@@ -47,7 +47,8 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <context:component-scan base-package="ua.kruart.workout.repository"/>
+    <context:component-scan base-package="ua.kruart.**.repository"/>
+    <context:component-scan base-package="ua.kruart.**.service"/>
 
     <tx:annotation-driven/>
 

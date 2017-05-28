@@ -40,6 +40,12 @@
       <version>${spring.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
     <!--JPA/Hibernate and Db's dependencies-->
     <dependency>
       <groupId>org.hibernate</groupId>
