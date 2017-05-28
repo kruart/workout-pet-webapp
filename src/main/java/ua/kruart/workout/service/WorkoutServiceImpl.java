@@ -26,18 +26,18 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     @Override
     public void update(Workout workout) {
-        Checks.checkParameter(repository.save(workout), "Not found entity");
+        Checks.checkParameter(repository.save(workout), workout.getId());
     }
 
     @Override
     public void delete(int id) {
-        Checks.checkParameter(repository.delete(id), "Not found entity");
+        Checks.checkParameter(repository.delete(id), id);
     }
 
     @Override
     public Workout get(int id) {
         Workout byId = repository.findById(id);
-        Checks.checkParameter(byId, "Not found entity");
+        Checks.checkParameter(byId, id);
         return byId;
     }
 

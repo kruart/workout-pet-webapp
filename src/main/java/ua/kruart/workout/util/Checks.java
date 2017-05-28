@@ -16,22 +16,22 @@ public final class Checks {
     /**
      * Verifies that specified check passed or throws exception otherwise
      * @param check
-     * @param message
+     * @param id
      * @throws InvalidParameterException
      */
-    public static void checkParameter(boolean check, String message) throws InvalidParameterException {
+    public static void checkParameter(boolean check, int id) throws InvalidParameterException {
         if (!check) {
-            throw new InvalidParameterException(message);
+            throw new InvalidParameterException("Not found entity with id=" + id);
         }
     }
 
     /**
      * Verifies that specified check passed or throws exception otherwise
      * @param check
-     * @param message
+     * @param id
      * @throws InvalidParameterException
      */
-    public static void checkParameter(Object check, String message) throws InvalidParameterException {
-        checkParameter(check != null, message);
+    public static void checkParameter(Object check, int id) throws InvalidParameterException {
+        checkParameter(check != null, id);
     }
 }

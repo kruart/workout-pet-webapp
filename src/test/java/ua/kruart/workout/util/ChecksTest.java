@@ -11,22 +11,22 @@ import ua.kruart.workout.util.exception.InvalidParameterException;
 public class ChecksTest {
     @Test
     public void testCheckParameterBoleanParamNoException() throws Exception {
-        Checks.checkParameter(true, "test");
+        Checks.checkParameter(true, 1);
     }
 
     @Test
     public void testCheckParameterObjectParamNoException() throws Exception {
-        Checks.checkParameter(new Object(), "test");
+        Checks.checkParameter(new Object(), 1);
     }
 
     @Test(expected = InvalidParameterException.class)
     public void testCheckParameterBoleanParamGetException() throws Exception {
-        Checks.checkParameter(false, "test");
+        Checks.checkParameter(false, 1);
     }
 
     @Test(expected = InvalidParameterException.class)
     public void testCheckParameterObjectParamGetException() throws Exception {
-        Checks.checkParameter(null, "test");
+        Checks.checkParameter(null, 1);
     }
 
     @Test(expected = IllegalAccessException.class)
