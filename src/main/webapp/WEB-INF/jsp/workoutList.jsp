@@ -22,6 +22,7 @@
 <body>
     <h1><b>Workout List</b></h1>
 
+    <a href="/workout/create">Add new workout</a>
     <table>
         <tr>
             <th>Id</th>
@@ -39,6 +40,8 @@
                 <td><a href="/workout/${workout.id}">${workout.name}</a></td>
                 <td>${workout.startWorkout}</td>
                 <td>${workout.endWorkout}</td>
+                <td><a href="/workout/update/${workout.id}">Edit</a></td>
+                <td><a href="/workout/delete/${workout.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

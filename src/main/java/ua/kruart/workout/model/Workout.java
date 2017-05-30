@@ -35,6 +35,10 @@ public class Workout extends NamedEntity {
 
     public Workout() {}
 
+    public Workout(String name, LocalDateTime start) {
+        this(null, name, null, start, null);
+    }
+
     public Workout(Integer id, String name, List<Exercise> exerciseList, LocalDateTime start, LocalDateTime end) {
         super(id, name);
         this.exerciseList = exerciseList;

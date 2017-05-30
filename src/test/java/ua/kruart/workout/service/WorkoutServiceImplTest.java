@@ -68,7 +68,7 @@ public class WorkoutServiceImplTest {
     @Test
     public void testGetSuccess() throws Exception {
         Workout workout = service.get(1);
-        assertEquals(1, workout.getId());
+        assertEquals((Integer) 1, workout.getId());
         assertEquals("chest", workout.getName());
     }
 
