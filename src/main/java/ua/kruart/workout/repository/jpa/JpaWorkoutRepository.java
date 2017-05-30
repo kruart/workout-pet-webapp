@@ -7,6 +7,7 @@ import ua.kruart.workout.repository.WorkoutRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -15,13 +16,14 @@ import java.util.List;
  * @author kruart on 22.05.2017.
  */
 @Repository
-@Transactional
+@Transactional(readOnly = true)
 public class JpaWorkoutRepository implements WorkoutRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public Workout save(Workout workout) {
         if (workout.isNew()) {
             entityManager.persist(workout);
@@ -33,10 +35,15 @@ public class JpaWorkoutRepository implements WorkoutRepository {
 
     @Override
     public Workout findById(int workoutId) {
-        return entityManager.find(Workout.class, workoutId);
+        TypedQuery<Workout> query = this.entityManager.createQuery("SELECT o FROM Workout o LEFT JOIN FETCH o.exerciseList WHERE o.id = " + workoutId, Workout.class);
+        return query.getResultList().size() > 0 ? query.getSingleResult() : null;
+//        Workout workout = entityManager.find(Workout.class, workoutId);
+//        workout.getExerciseList().size();
+//        return workout;
     }
 
     @Override
+    @Transactional
     public boolean delete(int workoutId) {
 //        entityManager.createQuery("DELETE FROM Workout w WHERE w.id=:id").setParameter("id", workoutId).executeUpdate();
         return entityManager

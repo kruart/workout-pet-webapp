@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Workout List</title>
+    <title>Approach List</title>
     <style>
         h1 {
             background-color: crimson;
@@ -26,19 +26,20 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>started</th>
-            <th>ended</th>
-            <th>exercises</th>
+            <th>Type</th>
+            <th>Complexity</th>
+            <th>muscles</th>
+            <th>comment</th>
 
         </tr>
-        <c:forEach items="${workoutList}" var="workout">
-            <jsp:useBean id="workout" scope="page" type="ua.kruart.workout.model.Workout"/>
+        <c:forEach items="${workout.exerciseList}" var="exercise">
             <tr>
-
-                <td>${workout.id}</td>
-                <td><a href="/workout/${workout.id}">${workout.name}</a></td>
-                <td>${workout.startWorkout}</td>
-                <td>${workout.endWorkout}</td>
+                <td>${exercise.id}</td>
+                <td>${exercise.description.name}</td>
+                <td>${exercise.description.type}</td>
+                <td>${exercise.description.complexity}</td>
+                <td>${exercise.description.muscles}</td>
+                <td>${exercise.comment}</td>
             </tr>
         </c:forEach>
     </table>
