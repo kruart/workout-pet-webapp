@@ -1,8 +1,11 @@
 package ua.kruart.workout.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.kruart.workout.service.WorkoutService;
 
 /**
  *
@@ -12,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/workout")
 public class WorkoutController {
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test() {
-        return "hello";
+    @Autowired
+    private WorkoutService service;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String workoutList(Model model) {
+        model.addAttribute("workoutList", service.getAll());
+        return "workoutList";
     }
 }
