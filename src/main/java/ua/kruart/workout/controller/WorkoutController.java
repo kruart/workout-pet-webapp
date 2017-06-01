@@ -32,7 +32,7 @@ public class WorkoutController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView getById(@PathVariable Integer id) {
-        return new ModelAndView("approachList").addObject("workout", service.get(id));
+        return new ModelAndView("exerciseList").addObject("workout", service.get(id));
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
