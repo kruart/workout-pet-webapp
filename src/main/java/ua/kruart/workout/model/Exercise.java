@@ -45,7 +45,7 @@ public class Exercise extends BaseEntity {
 
     public Exercise() {}
 
-    public Exercise(int id, ExerciseConfiguration conf, ExerciseDescription description, List<Approach> approaches, String comment) {
+    public Exercise(Integer id, ExerciseConfiguration conf, ExerciseDescription description, List<Approach> approaches, String comment) {
         super(id);
         this.conf = conf;
         this.description = description;
@@ -75,6 +75,14 @@ public class Exercise extends BaseEntity {
 
     public void setApproaches(List<Approach> approaches) {
         this.approaches = approaches;
+    }
+
+    public Workout getWorkout() {
+        return workout;
+    }
+
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
     }
 
     public String getComment() {
