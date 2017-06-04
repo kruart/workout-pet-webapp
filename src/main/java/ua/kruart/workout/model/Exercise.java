@@ -53,6 +53,12 @@ public class Exercise extends BaseEntity {
         this.comment = comment;
     }
 
+    public Exercise(Integer id, ExerciseConfiguration conf, ExerciseDescription description, List<Approach> approaches, Workout workout, String comment) {
+        this(id, conf, description, approaches, comment);
+        this.workout = workout;
+
+    }
+
     public ExerciseConfiguration getConf() {
         return conf;
     }

@@ -22,6 +22,7 @@
 <body>
     <h1><b>Exercise List</b></h1>
 
+    <a href="/exercise/create?wid=${exerciseList.get(0).workout.id}">Add new workout</a>
     <table>
         <tr>
             <th>Id</th>
@@ -40,6 +41,9 @@
                 <td>${exercise.description.complexity}</td>
                 <td>${exercise.description.muscles}</td>
                 <td>${exercise.comment}</td>
+                <td>${exercise.comment}</td>
+                <td><a href="/exercise/update/${exercise.id}?wid=${exercise.workout.id}">Edit</a></td>
+                <td><a href="/exercise/delete/${exercise.id}?wid=${exercise.workout.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
