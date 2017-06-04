@@ -7,7 +7,6 @@ import ua.kruart.workout.repository.WorkoutRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -35,11 +34,10 @@ public class JpaWorkoutRepository implements WorkoutRepository {
 
     @Override
     public Workout findById(int workoutId) {
-        TypedQuery<Workout> query = this.entityManager.createQuery("SELECT o FROM Workout o LEFT JOIN FETCH o.exerciseList WHERE o.id = " + workoutId, Workout.class);
-        return query.getResultList().size() > 0 ? query.getSingleResult() : null;
-//        Workout workout = entityManager.find(Workout.class, workoutId);
-//        workout.getExerciseList().size();
-//        return workout;
+//        TypedQuery<Workout> query = this.entityManager.createQuery("SELECT o FROM Workout o LEFT JOIN FETCH o.exerciseList WHERE o.id = " + workoutId, Workout.class);
+//        return query.getResultList().size() > 0 ? query.getSingleResult() : null;
+
+        return entityManager.find(Workout.class, workoutId);
     }
 
     @Override

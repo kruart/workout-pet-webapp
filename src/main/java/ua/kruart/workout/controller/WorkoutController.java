@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 /**
+ * Handles workout-related requests
  *
  * @author kruart on 28.05.2017.
  */
@@ -28,11 +29,6 @@ public class WorkoutController {
     public String workoutList(Model model) {
         model.addAttribute("workoutList", service.getAll());
         return "workoutList";
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ModelAndView getById(@PathVariable Integer id) {
-        return new ModelAndView("exerciseList").addObject("workout", service.get(id));
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)

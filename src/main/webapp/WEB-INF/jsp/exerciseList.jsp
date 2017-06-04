@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Approach List</title>
+    <title>Exercise List</title>
     <style>
         h1 {
             background-color: crimson;
@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <h1><b>Workout List</b></h1>
+    <h1><b>Exercise List</b></h1>
 
     <table>
         <tr>
@@ -32,7 +32,7 @@
             <th>comment</th>
 
         </tr>
-        <c:forEach items="${workout.exerciseList}" var="exercise">
+        <c:forEach items="${exerciseList}" var="exercise">
             <tr>
                 <td>${exercise.id}</td>
                 <td>${exercise.description.name}</td>

@@ -37,7 +37,7 @@
             <tr>
 
                 <td>${workout.id}</td>
-                <td><a href="/workout/${workout.id}">${workout.name}</a></td>
+                <td><a href="/exercise?wid=${workout.id}">${workout.name}</a></td>
                 <td>${workout.startWorkout}</td>
                 <td>${workout.endWorkout}</td>
                 <td><a href="/workout/update/${workout.id}">Edit</a></td>
