@@ -14,20 +14,46 @@
 </head>
 <body>
     <form action="/exercise/saveChanges?wid=${new_or_edit_model.workout.id}" method="post">
-        <input type="text" value="${new_or_edit_model.workout.id}" name="workoutId">
-        <input type="text" value="${new_or_edit_model.id}" name="id">
-        <input type="text" value="${new_or_edit_model.conf.distanceMeasure}" name="distanceMeasure">
-        <input type="text" value="${new_or_edit_model.conf.repeatMeasure}" name="repeatMeasure">
-        <input type="text" value="${new_or_edit_model.conf.timeMeasure}" name="timeMeasure">
-        <input type="text" value="${new_or_edit_model.conf.weightMeasure}" name="weightMeasure">
-        <input type="text" value="${new_or_edit_model.description.name}" name="name">
-        <input type="text" value="${new_or_edit_model.description.complexity}" name="complexity">
-        <input type="text" value="${new_or_edit_model.description.type}" name="type">
-        <input type="text" value="${new_or_edit_model.description.description}" name="desc">
-        Comment <input type="text" value="${new_or_edit_model.comment}" name="comment">
+        <input type="hidden" value="${new_or_edit_model.workout.id}" name="workoutId">
+        <input type="hidden" value="${new_or_edit_model.id}" name="id"><br>
+        <div id="conf" style="border: 1px solid red">
+            distance <input type="checkbox" value="${new_or_edit_model.conf.distanceMeasure}" name="distanceMeasure"><br>
+            repeat <input type="checkbox" value="${new_or_edit_model.conf.repeatMeasure}" name="repeatMeasure"><br>
+            time <input type="checkbox" value="${new_or_edit_model.conf.timeMeasure}" name="timeMeasure"><br>
+            weight <input type="checkbox" value="${new_or_edit_model.conf.weightMeasure}" name="weightMeasure"><br>
+        </div>
+        Name <input type="text" value="${new_or_edit_model.description.name}" name="name"><br>
+        Complexity <input type="text" value="${new_or_edit_model.description.complexity}" name="complexity"><br>
+        Type <input type="text" value="${new_or_edit_model.description.type}" name="type"><br>
+        Desc <input type="text" value="${new_or_edit_model.description.description}" name="desc"><br>
+        Comment <input type="text" value="${new_or_edit_model.comment}" name="comment"><br>
+        Muscles <br>
+        <c:forEach items="${new_or_edit_model.description.muscles}" var="muscle">
+        <c:choose>
+            <c:when test="${muscle.value eq 'main'}">
+                <%--Main muscle: <input type="text" value="${muscle.key.muscle}" name="main"><br>--%>
+                Main muscle: <input type="text" value="${muscle.key}" name="main"><br>
+            </c:when>
+            <c:otherwise>
+                Optional muscle: <input type="text" value="${muscle.key}" name="optional"><br>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
 
         <button type="submit">Save</button>
         <button onclick="window.history.back()">Cancel</button>
     </form>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.js" integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('input:checkbox[value=true]').prop('checked', 'checked');
+
+            $('input:checkbox').click(function (e) {
+                $(this).attr('value', this.checked ? 'true' : 'false');
+            });
+        });
+    </script>
+
 </body>
 </html>

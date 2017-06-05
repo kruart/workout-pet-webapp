@@ -4,13 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ua.kruart.workout.model.Exercise;
-import ua.kruart.workout.model.ExerciseConfiguration;
-import ua.kruart.workout.model.ExerciseDescription;
-import ua.kruart.workout.model.Workout;
+import ua.kruart.workout.model.*;
 import ua.kruart.workout.service.ExerciseService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Handles exercise-related requests
@@ -45,31 +44,8 @@ public class ExerciseController {
 
     @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
     public String createOrUpdate(HttpServletRequest req) {
-        // TODO: try to create converter String to Map<Muscle, String> and make refactoring
-        String id = req.getParameter("id");
-        Integer wid = Integer.parseInt(req.getParameter("workoutId"));
-        ExerciseConfiguration conf = new ExerciseConfiguration(
-                Boolean.valueOf(getFromReq("weightMeasure", req)),
-                Boolean.valueOf(getFromReq("timeMeasure", req)),
-                Boolean.valueOf(getFromReq("repeatMeasure", req)),
-                Boolean.valueOf(getFromReq("distanceMeasure", req))
-        );
-
-        ExerciseDescription desc = new ExerciseDescription(
-                null,
-                getFromReq("type", req),
-                getFromReq("complexity", req),
-                getFromReq("name", req),
-                getFromReq("desc", req)
-        );
-
-
-        Exercise exercise = new Exercise(
-                id.isEmpty() ? null : Integer.valueOf(id),
-                conf,
-                desc,
-                null,
-                getFromReq("comment", req));
+        Integer wid = Integer.parseInt(getDataFromReq("workoutId", req));
+        Exercise exercise = getModel(req);
 
         if (exercise.isNew()) {
             service.save(exercise, wid);
@@ -85,7 +61,42 @@ public class ExerciseController {
         return "redirect:/exercise?wid=" + wid;
     }
 
-    private String getFromReq(String param, HttpServletRequest req) {
+    private Exercise getModel(HttpServletRequest req) {
+        String id = req.getParameter("id");
+
+        return new Exercise(
+                id.isEmpty() ? null : Integer.valueOf(id),
+                new ExerciseConfiguration(
+                        Boolean.valueOf(getDataFromReq("weightMeasure", req)),
+                        Boolean.valueOf(getDataFromReq("timeMeasure", req)),
+                        Boolean.valueOf(getDataFromReq("repeatMeasure", req)),
+                        Boolean.valueOf(getDataFromReq("distanceMeasure", req))),
+                new ExerciseDescription(
+                        getMusclesMapFromReq(req),
+                        getDataFromReq("type", req),
+                        getDataFromReq("complexity", req),
+                        getDataFromReq("name", req),
+                        getDataFromReq("desc", req)),
+                null,
+                getDataFromReq("comment", req));
+    }
+
+    private String getDataFromReq(String param, HttpServletRequest req) {
         return req.getParameter(param);
     }
+
+    private Map<Muscle, String> getMusclesMapFromReq(HttpServletRequest req) {
+        Map<Muscle, String> muscles = new HashMap<>();
+        muscles.put(Muscle.valueOf(req.getParameter("main")), "main");
+
+        String[] lines = req.getParameterValues("optional");
+
+        for(String line : lines){
+            muscles.put(Muscle.valueOf(line), "optional");
+        }
+
+        return muscles;
+    }
+
+
 }

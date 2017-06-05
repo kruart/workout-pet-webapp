@@ -22,7 +22,7 @@
 <body>
     <h1><b>Exercise List</b></h1>
 
-    <a href="/exercise/create?wid=${exerciseList.get(0).workout.id}">Add new workout</a>
+    <a href="/exercise/create?wid=${exerciseList.get(0).workout.id}">Add new exercise</a>
     <table>
         <tr>
             <th>Id</th>
@@ -30,7 +30,10 @@
             <th>Type</th>
             <th>Complexity</th>
             <th>muscles</th>
+            <th>Desc</th>
             <th>comment</th>
+            <th>Edit</th>
+            <th>Delete</th>
 
         </tr>
         <c:forEach items="${exerciseList}" var="exercise">
@@ -40,7 +43,7 @@
                 <td>${exercise.description.type}</td>
                 <td>${exercise.description.complexity}</td>
                 <td>${exercise.description.muscles}</td>
-                <td>${exercise.comment}</td>
+                <td>${exercise.description.description}</td>
                 <td>${exercise.comment}</td>
                 <td><a href="/exercise/update/${exercise.id}?wid=${exercise.workout.id}">Edit</a></td>
                 <td><a href="/exercise/delete/${exercise.id}?wid=${exercise.workout.id}">Delete</a></td>
