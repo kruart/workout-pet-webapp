@@ -1,19 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Arthur
-  Date: 5/30/2017
-  Time: 6:58 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
-<head>
-    <title>Edit Exercise</title>
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
-    <form action="/exercise/saveChanges?wid=${new_or_edit_model.workout.id}" method="post">
+    <jsp:include page="fragments/header.jsp"/>
+
+    <br><br><br>
+    <div class="container">
+    <form action="<c:url value="/exercise/saveChanges?wid=${new_or_edit_model.workout.id}"/>" method="post">
         <input type="hidden" value="${new_or_edit_model.workout.id}" name="workoutId">
         <input type="hidden" value="${new_or_edit_model.id}" name="id"><br>
         <div id="conf" style="border: 1px solid red">
@@ -40,11 +35,13 @@
         </c:choose>
     </c:forEach>
 
-        <button type="submit">Save</button>
-        <button onclick="window.history.back()">Cancel</button>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button onclick="window.history.back()" class="btn btn-warning">Cancel</button>
     </form>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.js" integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg=" crossorigin="anonymous"></script>
+    <jsp:include page="fragments/footer.jsp"/>
+
     <script>
         $(document).ready(function () {
             $('input:checkbox[value=true]').prop('checked', 'checked');
@@ -54,6 +51,5 @@
             });
         });
     </script>
-
 </body>
 </html>

@@ -1,9 +1,10 @@
 +++ Create main page
---- Розбити .jsp files на незалежні частини для подальшого імпортування(для уникнення дублювання)
++++ Розбити .jsp files на незалежні частини для подальшого імпортування(для уникнення дублювання)
 --- Add ApproachController
 --- Add web-controller tests
 --- Прикрутити Jenkins
 --- Add validation (hibernate + spring)
 --- Bundles support
 --- Add opportunity to change locale
+--- Create login page
 --- Add spring security(in-memory)
