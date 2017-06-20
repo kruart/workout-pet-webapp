@@ -25,7 +25,7 @@ public class ExerciseController {
 
     @GetMapping
     public ModelAndView getAll(@RequestParam("wid") Integer workoutId) {
-        return new ModelAndView("exerciseList", "exerciseList", service.getAll(workoutId));
+        return new ModelAndView("exerciseList", "exerciseList", service.getAll(workoutId)).addObject("wid", workoutId);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
