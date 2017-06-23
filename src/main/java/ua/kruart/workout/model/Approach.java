@@ -38,13 +38,13 @@ public class Approach extends BaseEntity {
     @Column(name = "time")
     private LocalTime time;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
     public Approach() {}
 
-    public Approach(int id, int repeats, float weight, float distance, LocalTime time) {
+    public Approach(Integer id, int repeats, float weight, float distance, LocalTime time) {
         super(id);
         this.repeats = repeats;
         this.weight = weight;
@@ -82,6 +82,14 @@ public class Approach extends BaseEntity {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public Exercise getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 
     @Override

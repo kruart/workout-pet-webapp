@@ -1,6 +1,6 @@
 +++ Create main page
 +++ Розбити .jsp files на незалежні частини для подальшого імпортування(для уникнення дублювання)
---- Add ApproachController
+--- Add Approach realizations dao, service, controller layers
 --- Add web-controller tests
 --- Прикрутити Jenkins
 --- Add validation (hibernate + spring)

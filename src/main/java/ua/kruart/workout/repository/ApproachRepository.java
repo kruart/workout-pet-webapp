@@ -13,11 +13,11 @@ public interface ApproachRepository {
 
     /**
      * Saves(creates or modifies) specified {@link Approach} instance
-     * @param id unique identifier of {@link Approach} object
+     * @param approach object which is necessary to save or update
      * @param exerciseId unique identifier of {@link ua.kruart.workout.model.Exercise} instance to which {@link Approach} belongs
      * @return null if updated object is not found or {@code id} is not associated with {@code exerciseId}
      */
-    Approach save(int id, int exerciseId);
+    Approach save(Approach approach, int exerciseId);
 
     /**
      * Returns {@link Approach} with specified identifier.
