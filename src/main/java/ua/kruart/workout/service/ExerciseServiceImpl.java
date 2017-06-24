@@ -10,6 +10,8 @@ import ua.kruart.workout.util.exception.InvalidParameterException;
 import java.util.List;
 
 /**
+ * Implementation of the {@link ExerciseService} interface
+ *
  * Created by kruart on 03.06.2017.
  */
 @Service

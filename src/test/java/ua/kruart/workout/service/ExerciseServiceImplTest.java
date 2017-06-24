@@ -28,9 +28,10 @@ import static org.junit.Assert.assertNotEquals;
 @ActiveProfiles("hsqldb")
 public class ExerciseServiceImplTest {
 
-    public static final int EXERCISE_CORRECT_ID = 7;
-    public static final int EXERCISE_INCORRECT_ID = 3;
+    private static final int EXERCISE_CORRECT_ID = 7;
+    private static final int EXERCISE_INCORRECT_ID = 3;
     private static int WORKOUT_CORRECT_ID = 2;
+    private static int WORKOUT_INCORRECT_ID = 99;
     @Autowired
     private ExerciseService service;
 
@@ -38,9 +39,9 @@ public class ExerciseServiceImplTest {
     public void testSave() {
         int sizeBeforeSave = service.getAll(WORKOUT_CORRECT_ID).size();
         Exercise testData = service.save(getTestData(), WORKOUT_CORRECT_ID);
-        Exercise exerciseById = service.get(testData.getId(), WORKOUT_CORRECT_ID);
-        assertEquals(testData, exerciseById);
-        assertEquals(testData.getDescription().getName(), exerciseById.getDescription().getName());
+        Exercise savedEx = service.get(testData.getId(), WORKOUT_CORRECT_ID);
+        assertEquals(testData, savedEx);
+        assertEquals(testData.getDescription().getName(), savedEx.getDescription().getName());
         assertNotEquals(sizeBeforeSave, service.getAll(WORKOUT_CORRECT_ID).size());
     }
 
@@ -54,7 +55,9 @@ public class ExerciseServiceImplTest {
 
     @Test(expected = InvalidParameterException.class)
     public void testUpdateFailure() {
-        Exercise testData = service.get(EXERCISE_INCORRECT_ID, WORKOUT_CORRECT_ID);
+        Exercise testData = service.get(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID);
+        testData.setComment("UPDATE");
+        service.update(testData, WORKOUT_INCORRECT_ID);
     }
 
     @Test
