@@ -24,9 +24,9 @@ public class ApproachController {
     private ApproachService service;
 
     @GetMapping()
-    public ModelAndView getAll(@RequestParam("eid") Integer exerciseId) {
+    public ModelAndView getAllApproaches(@RequestParam("eid") Integer exerciseId) {
         List<Approach> approaches = service.getAll(exerciseId);
-        return new ModelAndView("approachList", "approachModel", approaches).addObject("eid", exerciseId);
+        return new ModelAndView("approachList", "approachList", approaches).addObject("eid", exerciseId);
     }
 
     @GetMapping("create")
@@ -61,7 +61,7 @@ public class ApproachController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteApproach(@PathVariable Integer id, @RequestParam("eid") Integer exerciseId) {
+    public String removeApproach(@PathVariable Integer id, @RequestParam("eid") Integer exerciseId) {
         service.delete(id, exerciseId);
         return "redirect:/approach?eid=" + exerciseId;
     }

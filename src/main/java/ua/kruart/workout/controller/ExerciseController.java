@@ -24,7 +24,7 @@ public class ExerciseController {
     private ExerciseService service;
 
     @GetMapping
-    public ModelAndView getAll(@RequestParam("wid") Integer workoutId) {
+    public ModelAndView getAllExercise(@RequestParam("wid") Integer workoutId) {
         return new ModelAndView("exerciseList", "exerciseList", service.getAll(workoutId)).addObject("wid", workoutId);
     }
 
@@ -33,13 +33,13 @@ public class ExerciseController {
         Workout workout = new Workout();
         workout.setId(workoutId);
         return new ModelAndView("editExercise")
-                .addObject("new_or_edit_model", new Exercise(null, new ExerciseConfiguration(), new ExerciseDescription(), null, workout, ""));
+                .addObject("exerciseModel", new Exercise(null, new ExerciseConfiguration(), new ExerciseDescription(), null, workout, ""));
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public ModelAndView updateExercise(@PathVariable Integer id, @RequestParam("wid") Integer workoutId) {
         return new ModelAndView("editExercise")
-                .addObject("new_or_edit_model", service.get(id, workoutId));
+                .addObject("exerciseModel", service.get(id, workoutId));
     }
 
     @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
@@ -56,7 +56,7 @@ public class ExerciseController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String removeExerciseById(@PathVariable Integer id, @RequestParam("wid") Integer wid) {
+    public String removeExercise(@PathVariable Integer id, @RequestParam("wid") Integer wid) {
         service.delete(id, wid);
         return "redirect:/exercise?wid=" + wid;
     }

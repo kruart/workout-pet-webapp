@@ -26,19 +26,19 @@ public class WorkoutController {
     private WorkoutService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String workoutList(Model model) {
+    public String getAllWorkouts(Model model) {
         model.addAttribute("workoutList", service.getAll());
         return "workoutList";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView createWorkout() {
-        return new ModelAndView("editWorkout").addObject("new_or_edit_model", new Workout("", LocalDateTime.now()));
+        return new ModelAndView("editWorkout").addObject("workoutModel", new Workout("", LocalDateTime.now()));
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public ModelAndView updateWorkout(@PathVariable Integer id) {
-        return new ModelAndView("editWorkout").addObject("new_or_edit_model", service.get(id));
+        return new ModelAndView("editWorkout").addObject("workoutModel", service.get(id));
     }
 
     @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
@@ -60,7 +60,7 @@ public class WorkoutController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String removeWorkoutById(@PathVariable Integer id) {
+    public String removeWorkout(@PathVariable Integer id) {
         service.delete(id);
         return "redirect:/workout";
     }

@@ -21,7 +21,7 @@
 
             </tr>
             </thead>
-            <c:forEach items="${approachModel}" var="approach" varStatus="theCount">
+            <c:forEach items="${approachList}" var="approach" varStatus="theCount">
                 <tr>
                     <td>${theCount.index + 1}</td>
                     <td>${approach.repeats}</td>

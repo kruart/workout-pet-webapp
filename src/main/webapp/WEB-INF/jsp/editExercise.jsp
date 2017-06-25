@@ -8,36 +8,42 @@
 
     <br><br><br>
     <div class="container">
-    <form action="<c:url value="/exercise/saveChanges"/>" method="post">
-        <input type="hidden" value="${new_or_edit_model.workout.id}" name="workoutId">
-        <input type="hidden" value="${new_or_edit_model.id}" name="id"><br>
-        <div id="conf" style="border: 1px solid red">
-            distance <input type="checkbox" value="${new_or_edit_model.conf.distanceMeasure}" name="distanceMeasure"><br>
-            repeat <input type="checkbox" value="${new_or_edit_model.conf.repeatMeasure}" name="repeatMeasure"><br>
-            time <input type="checkbox" value="${new_or_edit_model.conf.timeMeasure}" name="timeMeasure"><br>
-            weight <input type="checkbox" value="${new_or_edit_model.conf.weightMeasure}" name="weightMeasure"><br>
-        </div>
-        Name <input type="text" value="${new_or_edit_model.description.name}" name="name"><br>
-        Complexity <input type="text" value="${new_or_edit_model.description.complexity}" name="complexity"><br>
-        Type <input type="text" value="${new_or_edit_model.description.type}" name="type"><br>
-        Desc <input type="text" value="${new_or_edit_model.description.description}" name="desc"><br>
-        Comment <input type="text" value="${new_or_edit_model.comment}" name="comment"><br>
-        Muscles <br>
-        <c:forEach items="${new_or_edit_model.description.muscles}" var="muscle">
-        <c:choose>
-            <c:when test="${muscle.value eq 'main'}">
-                <%--Main muscle: <input type="text" value="${muscle.key.muscle}" name="main"><br>--%>
-                Main muscle: <input type="text" value="${muscle.key}" name="main"><br>
-            </c:when>
-            <c:otherwise>
-                Optional muscle: <input type="text" value="${muscle.key}" name="optional"><br>
-            </c:otherwise>
-        </c:choose>
-    </c:forEach>
+        <form action="<c:url value="/exercise/saveChanges"/>" method="post">
+            <input type="hidden" value="${exerciseModel.workout.id}" name="workoutId">
+            <input type="hidden" value="${exerciseModel.id}" name="id"><br>
+            <div id="conf" style="border: 1px solid red">
+                <label>distance <input type="checkbox" value="${exerciseModel.conf.distanceMeasure}" name="distanceMeasure"></label><br>
+                <label>repeat <input type="checkbox" value="${exerciseModel.conf.repeatMeasure}" name="repeatMeasure"></label><br>
+                <label>time <input type="checkbox" value="${exerciseModel.conf.timeMeasure}" name="timeMeasure"></label><br>
+                <label>weight <input type="checkbox" value="${exerciseModel.conf.weightMeasure}" name="weightMeasure"></label><br>
+            </div>
+            <label>Name<input type="text" class="form-control" value="${exerciseModel.description.name}" name="name"></label><br>
+            <label>Complexity<input type="text" class="form-control" value="${exerciseModel.description.complexity}" name="complexity"></label><br>
+            <label>Type <input type="text" class="form-control" value="${exerciseModel.description.type}" name="type"></label><br>
+            <label>Desc <input type="text" class="form-control" value="${exerciseModel.description.description}" name="desc"></label><br>
+            <label> Comment <input type="text" class="form-control" value="${exerciseModel.comment}" name="comment"></label><br>
+            Muscles <br>
+            
+            <c:if test="${exerciseModel.description.muscles == null}">
+                <label>Main muscle: <input type="text" class="form-control" value="" name="main"></label><br>
+                <label>Optional muscle: <input type="text" class="form-control"value="" name="optional"></label><br>
+            </c:if>
 
-        <button type="submit" class="btn btn-success">Save</button>
-        <button onclick="window.history.back()" class="btn btn-warning">Cancel</button>
-    </form>
+            <c:forEach items="${exerciseModel.description.muscles}" var="muscle">
+                <c:choose>
+                    <c:when test="${muscle.value eq 'main'}">
+                        <%--Main muscle: <input type="text" value="${muscle.key.muscle}" name="main"><br>--%>
+                        <label>Main muscle: <input type="text" value="${muscle.key}" name="main"></label><br>
+                    </c:when>
+                    <c:otherwise>
+                        <label>Optional muscle: <input type="text" value="${muscle.key}" name="optional"></label><br>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <button type="submit" class="btn btn-success">Save</button>
+            <button onclick="window.history.back()" class="btn btn-warning">Cancel</button>
+        </form>
     </div>
 
     <jsp:include page="fragments/footer.jsp"/>

@@ -7,7 +7,7 @@
 
     <br><br><br>
     <div class="container">
-        <a class="btn btn-primary" href="/exercise/create?wid=${wid}">Add new exercise</a>
+        <a class="btn btn-primary" href="<c:url value="/exercise/create?wid=${wid}"/>">Add new exercise</a>
         <table class="table">
             <thead class="thead-inverse">
             <tr>
