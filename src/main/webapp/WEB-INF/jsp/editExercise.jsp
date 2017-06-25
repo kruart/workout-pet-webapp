@@ -8,7 +8,7 @@
 
     <br><br><br>
     <div class="container">
-    <form action="<c:url value="/exercise/saveChanges?wid=${new_or_edit_model.workout.id}"/>" method="post">
+    <form action="<c:url value="/exercise/saveChanges"/>" method="post">
         <input type="hidden" value="${new_or_edit_model.workout.id}" name="workoutId">
         <input type="hidden" value="${new_or_edit_model.id}" name="id"><br>
         <div id="conf" style="border: 1px solid red">

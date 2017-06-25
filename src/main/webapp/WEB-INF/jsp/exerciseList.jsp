@@ -15,9 +15,9 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Complexity</th>
-                <th>muscles</th>
+                <th>Muscles</th>
                 <th>Desc</th>
-                <th>comment</th>
+                <th>Comment</th>
                 <th>Edit</th>
                 <th>Delete</th>
 
@@ -26,7 +26,7 @@
             <c:forEach items="${exerciseList}" var="exercise" varStatus="theCount">
                 <tr>
                     <td>${theCount.index + 1}</td>
-                    <td>${exercise.description.name}</td>
+                    <td><a href="<c:url value="/approach?eid=${exercise.id}"/>">${exercise.description.name}</a></td>
                     <td>${exercise.description.type}</td>
                     <td>${exercise.description.complexity}</td>
                     <td>${exercise.description.muscles}</td>

@@ -52,6 +52,11 @@ public class Approach extends BaseEntity {
         this.time = time;
     }
 
+    public Approach(Integer id, int repeats, float weight, float distance, LocalTime time, Exercise exercise) {
+        this(id, repeats, weight, distance, time);
+        this.exercise = exercise;
+    }
+
     public int getRepeats() {
         return repeats;
     }
