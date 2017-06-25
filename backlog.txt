@@ -1,10 +1,14 @@
 +++ Create main page
-+++ Розбити .jsp files на незалежні частини для подальшого імпортування(для уникнення дублювання)
---- Add Approach realizations dao, service, controller layers
++++ Create independent parts of .jsp files to avoid duplication
++++ Add Approach realizations dao, service, controller layers
 --- Add web-controller tests
---- Прикрутити Jenkins
+--- setup Jenkins
 --- Add validation (hibernate + spring)
 --- Bundles support
 --- Add opportunity to change locale
 --- Create login page
 --- Add spring security(in-memory)
+--- Add spring oauth(github)
+--- Rewrite xml-conf on java conf
+--- Migrate to Spring Boot
+--- Migrate to MongoDB
