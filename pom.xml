@@ -18,7 +18,7 @@
     <!--spring-->
     <spring.version>4.3.8.RELEASE</spring.version>
     <!--web-->
-    <servlet.version>2.5</servlet.version>
+    <servlet.version>3.1.0</servlet.version>
     <jstl.version>1.2</jstl.version>
     <!--hibernate-->
     <hibernate.version>5.2.3.Final</hibernate.version>
@@ -58,8 +58,9 @@
 
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
+      <artifactId>javax.servlet-api</artifactId>
       <version>${servlet.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
