@@ -9,10 +9,10 @@
     <br><br><br>
     <div class="container">
         <form action="<c:url value="/workout/saveChanges"/>" method="post">
-            <input type="hidden" value="${workoutModel.id}" name="id">
-            <label>Name<input type="text" value="${workoutModel.name}" name="name"></label>
-            <label>Starts<input type="datetime-local" value="${workoutModel.startWorkout}" name="startWorkout"></label>
-            <label>Ends<input type="datetime-local" value="${workoutModel.endWorkout}" name="endWorkout"></label>
+            <input type="hidden" value="${workoutModel.id}" name="id"><br>
+            <label>Name <input type="text" class="form-control" value="${workoutModel.name}" name="name"></label><br>
+            <label>Starts <input type="datetime-local" class="form-control" value="${workoutModel.startWorkout}" name="startWorkout"></label><br>
+            <label>Ends <input type="datetime-local" class="form-control" value="${workoutModel.endWorkout}" name="endWorkout"></label><br>
 
             <button type="submit" class="btn btn-success">Save</button>
             <button onclick="window.history.back()" class="btn btn-warning">Cancel</button>
