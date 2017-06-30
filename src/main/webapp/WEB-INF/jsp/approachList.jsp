@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
@@ -7,17 +8,17 @@
 
     <br><br><br>
     <div class="container">
-        <a class="btn btn-primary" href="<c:url value="/approach/create?eid=${eid}"/>">Add new approach</a>
+        <a class="btn btn-primary" href="<c:url value="/approach/create?eid=${eid}"/>"><spring:message code="message.addBtn"/></a>
         <table class="table">
             <thead class="thead-inverse">
             <tr>
                 <th>#</th>
-                <th>Repeats</th>
-                <th>Weight</th>
-                <th>Distance</th>
-                <th>Time</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th><spring:message code="message.repeats"/></th>
+                <th><spring:message code="message.weight"/></th>
+                <th><spring:message code="message.distance"/></th>
+                <th><spring:message code="message.time"/></th>
+                <th></th>
+                <th></th>
 
             </tr>
             </thead>
@@ -28,8 +29,8 @@
                     <td>${approach.weight}</td>
                     <td>${approach.distance}</td>
                     <td>${approach.time}</td>
-                    <td><a class="btn btn-warning" href="<c:url value="/approach/update/${approach.id}?eid=${eid}"/>">Edit</a></td>
-                    <td><a class="btn btn-danger" href="<c:url value="/approach/delete/${approach.id}?eid=${eid}"/>">Delete</a></td>
+                    <td><a class="btn btn-warning" href="<c:url value="/approach/update/${approach.id}?eid=${eid}"/>"><spring:message code="message.editBtn"/></a></td>
+                    <td><a class="btn btn-danger" href="<c:url value="/approach/delete/${approach.id}?eid=${eid}"/>"><spring:message code="message.deleteBtn"/></a></td>
                 </tr>
             </c:forEach>
         </table>

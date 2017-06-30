@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="fragments/headTag.jsp"/>
