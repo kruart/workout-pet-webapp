@@ -23,9 +23,17 @@
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:defaultEncoding="UTF-8">
         <property name="basenames" value="classpath:locales/messages"/>
+        <!--change locale on default locale. Spring will search file messages.properties - is default locale-->
+        <property name="fallbackToSystemLocale" value="false"/>
     </bean>
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
         <property name="defaultLocale" value="uk"/>
     </bean>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+    </mvc:interceptors>
 </beans>

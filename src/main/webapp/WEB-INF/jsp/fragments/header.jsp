@@ -23,7 +23,7 @@
                 <a class="nav-link" href="#"><spring:message code="message.contactsMenuItem"/></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><spring:message code="message.optionsMenuItem"/> </a>
+                <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><spring:message code="message.optionsMenuItem"/> </a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#"><spring:message code="message.myProgramsMenuItem"/></a>
                     <a class="dropdown-item" href="<c:url value="/workout/create"/>"><spring:message code="message.createNewWorkoutMenuItem"/></a>
@@ -32,6 +32,7 @@
             </li>
         </ul>
         <ul class="nav navbar-nav">
+            <jsp:include page="lang.jsp"/>
             <li class="nav-item">
                 <a class="nav-link" href="#">Username</a>
             </li>

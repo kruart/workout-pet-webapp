@@ -7,7 +7,7 @@
 --- Handles error
 --- ??hibernate cache
 +++ Bundles support
---- Add opportunity to change locale
++++ Add opportunity to change locale
 --- Create login page
 --- Add spring security(in-memory)
 --- Add spring oauth(github)
