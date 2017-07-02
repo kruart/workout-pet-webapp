@@ -1,8 +1,10 @@
 package ua.kruart.workout.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import ua.kruart.workout.model.base.NamedEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,12 +25,16 @@ public class Workout extends NamedEntity {
      * Date when workout was started
      */
     @Column(name = "startWorkout")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @NotNull
     private LocalDateTime startWorkout;
 
     /**
      * Date when workout was ended
      */
     @Column(name = "endWorkout")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @NotNull
     private LocalDateTime endWorkout;
 
     /**

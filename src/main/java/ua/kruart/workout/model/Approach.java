@@ -1,8 +1,11 @@
 package ua.kruart.workout.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import ua.kruart.workout.model.base.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 /**
@@ -23,24 +26,29 @@ public class Approach extends BaseEntity {
      * Repeats in one approach
      */
     @Column(name = "repeats")
+    @Min(value = 0, message = "The value must be positive")
     private int repeats;
 
     /**
      * Tonnage of the current approach
      */
     @Column(name = "weight")
+    @Min(value = 0, message = "The value must be positive")
     private float weight;
 
     /**
      * Distance of the current approach
      */
     @Column(name = "distance")
+    @Min(value = 0, message = "The value must be positive")
     private float distance;
 
     /**
      * Time of execution a current approach
      */
     @Column(name = "time")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @NotNull
     private LocalTime time;
 
     @ManyToOne(fetch = FetchType.LAZY)

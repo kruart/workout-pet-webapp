@@ -11,16 +11,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ExerciseConfiguration {
 
-    @Column(name = "weightMeasure")
+    @Column(name = "weightMeasure", nullable = false)
     private boolean weightMeasure;
 
-    @Column(name = "timeMeasure")
+    @Column(name = "timeMeasure", nullable = false)
     private boolean timeMeasure;
 
-    @Column(name = "repeatMeasure")
+    @Column(name = "repeatMeasure", nullable = false)
     private boolean repeatMeasure;
 
-    @Column(name = "distanceMeasure")
+    @Column(name = "distanceMeasure", nullable = false)
     private boolean distanceMeasure;
 
     public ExerciseConfiguration() {

@@ -2,6 +2,7 @@ package ua.kruart.workout.model.base;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Size;
 
 /**
  * Base class for all business entities which contains name property
@@ -12,6 +13,7 @@ import javax.persistence.MappedSuperclass;
 public class NamedEntity extends BaseEntity {
 
     @Column(name = "name", nullable = false)
+    @Size(min = 1, max = 50)
     protected String name;
 
     public NamedEntity() {

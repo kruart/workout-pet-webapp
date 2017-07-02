@@ -1,6 +1,9 @@
 package ua.kruart.workout.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Map;
 
 /**
@@ -27,18 +30,21 @@ public class ExerciseDescription {
      * Type of complexity: Basic or Isolating
      */
     @Column(name = "type", nullable = false)
+    @NotEmpty
     private String type;
 
     /**
      * Simple, Middle, Hard
      */
     @Column(name = "complexity", nullable = false)
+    @NotEmpty
     private String complexity;
 
     /**
      * Name of the exercise
      */
     @Column(name = "exercise_name", nullable = false)
+    @Size(min = 1, max = 75)
     private String name;
 
     /**
