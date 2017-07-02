@@ -5,7 +5,6 @@ import ua.kruart.workout.model.base.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 /**
@@ -48,7 +47,6 @@ public class Approach extends BaseEntity {
      */
     @Column(name = "time")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    @NotNull
     private LocalTime time;
 
     @ManyToOne(fetch = FetchType.LAZY)

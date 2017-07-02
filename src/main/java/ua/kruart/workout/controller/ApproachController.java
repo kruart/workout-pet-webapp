@@ -2,13 +2,14 @@ package ua.kruart.workout.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.kruart.workout.model.Approach;
 import ua.kruart.workout.service.ApproachService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalTime;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -40,16 +41,12 @@ public class ApproachController {
     }
 
     @PostMapping("saveChanges")
-    public String createOrUpdate(HttpServletRequest req) {
-        Integer exerciseId = Integer.parseInt(req.getParameter("eid"));
-        String id = req.getParameter("id");
-        String time = req.getParameter("time");
-        Approach approach = new Approach(
-                id.isEmpty() ? null : Integer.parseInt(id),
-                Integer.parseInt(req.getParameter("repeats")),
-                Float.parseFloat(req.getParameter("weight")),
-                Float.parseFloat(req.getParameter("distance")),
-                time.isEmpty() ? null : LocalTime.parse(time));
+    public String createOrUpdate(@RequestParam(name = "eid") Integer exerciseId,
+                                 @Valid @ModelAttribute("approachModel") Approach approach, BindingResult result, ModelMap map) {
+        if (result.hasErrors()) {
+            map.addAttribute("eid", exerciseId);
+            return "editApproach";
+        }
 
         if(approach.isNew()) {
             service.save(approach, exerciseId);

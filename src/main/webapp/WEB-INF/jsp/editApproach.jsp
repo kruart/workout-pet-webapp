@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
@@ -8,19 +9,44 @@
 
     <br><br><br>
     <div class="container">
-        <form action="<c:url value="/approach/saveChanges"/>" method="post">
+        <form:form  method="post" modelAttribute="approachModel" action="/approach/saveChanges" >
             <div class="form-group">
                 <input type="hidden" value="${eid}" name="eid"><br>
-                <input type="hidden" value="${approachModel.id}" name="id"><br>
-                <label><spring:message code="message.distance"/> <input type="text" class="form-control" value="${approachModel.distance}" name="distance"></label><br>
-                <label><spring:message code="message.repeats"/> <input type="text" class="form-control" value="${approachModel.repeats}" name="repeats"></label><br>
-                <label><spring:message code="message.time"/> <input type="time" class="form-control" value="${approachModel.time}" name="time"></label><br>
-                <label><spring:message code="message.weight"/> <input type="text" class="form-control" value="${approachModel.weight}" name="weight"></label><br>
+                <form:hidden path="id"/>
+                <br>
+
+                <form:label path="distance">
+                    <spring:message code="message.distance"/>
+                    <form:input path="distance" class="form-control"/>
+                </form:label>
+                <b class="errorMessage"><form:errors path="distance"/></b>
+                <br>
+
+                <form:label path="repeats">
+                    <spring:message code="message.repeats"/>
+                    <form:input path="repeats" class="form-control" />
+                </form:label>
+                <b class="errorMessage"><form:errors path="repeats"/></b>
+                <br>
+
+                <form:label path="time">
+                    <spring:message code="message.time"/>
+                    <form:input path="time" type="time" class="form-control"/>
+                </form:label>
+                <b class="errorMessage"><form:errors path="time"/></b>
+                <br>
+
+                <form:label path="weight">
+                    <spring:message code="message.weight"/>
+                    <form:input path="weight" class="form-control"/>
+                </form:label>
+                <b class="errorMessage"><form:errors path="weight"/></b>
+                <br>
 
                 <button type="submit" class="btn btn-success"><spring:message code="message.saveBtn"/></button>
                 <button onclick="window.history.back()" class="btn btn-warning"><spring:message code="message.cancelBtn"/></button>
             </div>
-        </form>
+        </form:form>
     </div>
     <jsp:include page="fragments/footer.jsp"/>
 </body>
