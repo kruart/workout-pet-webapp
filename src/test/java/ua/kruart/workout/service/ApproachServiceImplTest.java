@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.kruart.workout.model.Approach;
 import ua.kruart.workout.util.exception.InvalidParameterException;
 
-import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -90,7 +89,7 @@ public class ApproachServiceImplTest {
 
 
     public Approach getTestData() {
-        return new Approach(null, 5, 99.9f, 0, LocalTime.now());
+        return new Approach(null, 5, 99.9f, 0, 0);
     }
 
 }

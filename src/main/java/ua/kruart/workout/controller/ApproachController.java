@@ -32,7 +32,7 @@ public class ApproachController {
 
     @GetMapping("create")
     public ModelAndView createApproach(@RequestParam("eid") Integer exerciseId) {
-        return new ModelAndView("editApproach", "approachModel", new Approach(null, 0, 0, 0, null)).addObject("eid", exerciseId);
+        return new ModelAndView("editApproach", "approachModel", new Approach(null, 0, 0, 0, 0)).addObject("eid", exerciseId);
     }
 
     @GetMapping("update/{id}")

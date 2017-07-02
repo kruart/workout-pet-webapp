@@ -31,7 +31,7 @@ create table tbl_exercise (
 create table tbl_approach (
   id INTEGER PRIMARY KEY DEFAULT nextval('entity_id_seq'),
   distance float4, repeats int4,
-  time time,
+  time INTEGER,
   weight float4,
   exercise_id int4 not null,
   FOREIGN KEY (exercise_id) REFERENCES tbl_exercise (id) ON DELETE CASCADE

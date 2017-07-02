@@ -31,26 +31,26 @@ INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name)
 INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (7, 'main', 'BICEPS');
 INSERT INTO public.tbl_muscles(exercise_id, goal_of_working_muscle, muscle_name) VALUES (7, 'optional', 'FOREARMS');
 
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 15, null, 0, 3);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 9, null, 0, 3);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, null, 0, 3);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 4, null, 0, 3);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 11, null, 89.7, 4);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, null, 89.7, 4);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, null, 89.7, 4);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, null, 89.7, 4);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, null, 15.2, 5);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, null, 15.2, 5);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 3, null, 15.2, 5);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 10, null, 12.7, 5);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 9, null, 24.0, 6);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 9, null, 24.0, 6);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 7, null, 24.0, 6);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, null, 24.0, 6);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 7, null, 45.7, 7);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, null, 45.7, 7);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, null, 45.7, 7);
-INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, null, 45.7, 7);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 15, 0, 0, 3);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 9, 0, 0, 3);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, 0, 0, 3);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 4, 0, 0, 3);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 11, 0, 89.7, 4);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, 0, 89.7, 4);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, 0, 89.7, 4);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, 0, 89.7, 4);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, 0, 15.2, 5);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, 0, 15.2, 5);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 3, 0, 15.2, 5);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 10, 0, 12.7, 5);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 9, 0, 24.0, 6);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 9, 0, 24.0, 6);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 7, 0, 24.0, 6);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, 0, 24.0, 6);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 7, 0, 45.7, 7);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 8, 0, 45.7, 7);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, 0, 45.7, 7);
+INSERT INTO public.tbl_approach(distance, repeats, time, weight, exercise_id) VALUES (0, 5, 0, 45.7, 7);
 
 
 

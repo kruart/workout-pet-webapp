@@ -1,11 +1,9 @@
 package ua.kruart.workout.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import ua.kruart.workout.model.base.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.time.LocalTime;
 
 /**
  * Describes one physical approach during the exercise
@@ -43,11 +41,11 @@ public class Approach extends BaseEntity {
     private float distance;
 
     /**
-     * Time of execution a current approach
+     * Time of execution a current approach in minutes
      */
     @Column(name = "time")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime time;
+    @Min(value = 0, message = "The value must be positive")
+    private Integer time;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exercise_id", nullable = false)
@@ -55,7 +53,7 @@ public class Approach extends BaseEntity {
 
     public Approach() {}
 
-    public Approach(Integer id, int repeats, float weight, float distance, LocalTime time) {
+    public Approach(Integer id, int repeats, float weight, float distance, Integer time) {
         super(id);
         this.repeats = repeats;
         this.weight = weight;
@@ -63,7 +61,7 @@ public class Approach extends BaseEntity {
         this.time = time;
     }
 
-    public Approach(Integer id, int repeats, float weight, float distance, LocalTime time, Exercise exercise) {
+    public Approach(Integer id, int repeats, float weight, float distance, Integer time, Exercise exercise) {
         this(id, repeats, weight, distance, time);
         this.exercise = exercise;
     }
@@ -92,11 +90,11 @@ public class Approach extends BaseEntity {
         this.distance = distance;
     }
 
-    public LocalTime getTime() {
+    public Integer getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 

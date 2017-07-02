@@ -31,7 +31,7 @@
 
                 <form:label path="time">
                     <spring:message code="message.time"/>
-                    <form:input path="time" type="time" class="form-control"/>
+                    <form:input path="time" class="form-control"/>
                 </form:label>
                 <b class="errorMessage"><form:errors path="time"/></b>
                 <br>
