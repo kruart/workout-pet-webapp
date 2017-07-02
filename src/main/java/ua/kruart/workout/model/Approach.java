@@ -10,6 +10,11 @@ import java.time.LocalTime;
  *
  * @author kruart on 14.05.2017.
  */
+@NamedQueries({
+        @NamedQuery(name = "Approach.findById", query = "SELECT a FROM Approach a WHERE a.id=:id AND a.exercise.id=:exerciseId"),
+        @NamedQuery(name = "Approach.delete", query = "DELETE FROM Approach a WHERE a.id=:id AND a.exercise.id=:exerciseId"),
+        @NamedQuery(name = "Approach.findAll", query = "SELECT a FROM Approach a WHERE a.exercise.id=:exerciseId"),
+})
 @Table(name = "tbl_approach")
 @Entity
 public class Approach extends BaseEntity {

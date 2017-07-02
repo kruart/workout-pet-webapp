@@ -39,7 +39,7 @@ public class JpaExerciseRepository implements ExerciseRepository {
 
     @Override
     public Exercise findById(int id, int workoutId) {
-        List<Exercise> exerciseList = entityManager.createQuery("SELECT e FROM Exercise e WHERE e.id=:id AND e.workout.id=:workoutId", Exercise.class)
+        List<Exercise> exerciseList = entityManager.createNamedQuery("Exercise.findById", Exercise.class)
                 .setParameter("id", id)
                 .setParameter("workoutId", workoutId)
                 .getResultList();
@@ -49,7 +49,7 @@ public class JpaExerciseRepository implements ExerciseRepository {
     @Override
     @Transactional
     public boolean delete(int id, int workoutId) {
-        return entityManager.createQuery("DELETE FROM Exercise e WHERE e.id=:id AND e.workout.id=:workoutId")
+        return entityManager.createNamedQuery("Exercise.delete")
                 .setParameter("id", id)
                 .setParameter("workoutId", workoutId)
                 .executeUpdate() != 0;
@@ -57,7 +57,7 @@ public class JpaExerciseRepository implements ExerciseRepository {
 
     @Override
     public List<Exercise> findAll(int workoutId) {
-        return entityManager.createQuery("SELECT e FROM Exercise e WHERE e.workout.id=:id", Exercise.class)
+        return entityManager.createNamedQuery("Exercise.findAll", Exercise.class)
                 .setParameter("id", workoutId)
                 .getResultList();
 

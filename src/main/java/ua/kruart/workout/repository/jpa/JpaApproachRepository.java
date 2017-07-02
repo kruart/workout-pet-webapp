@@ -39,7 +39,7 @@ public class JpaApproachRepository implements ApproachRepository {
 
     @Override
     public Approach findById(int id, int exerciseId) {
-        List<Approach> approachTypedQuery = em.createQuery("SELECT a FROM Approach a WHERE a.id=:id AND a.exercise.id=:exerciseId", Approach.class)
+        List<Approach> approachTypedQuery = em.createNamedQuery("Approach.findById", Approach.class)
                 .setParameter("id", id)
                 .setParameter("exerciseId", exerciseId)
                 .getResultList();
@@ -49,7 +49,7 @@ public class JpaApproachRepository implements ApproachRepository {
     @Transactional
     @Override
     public boolean delete(int id, int exerciseId) {
-        return em.createQuery("DELETE FROM Approach a WHERE a.id=:id AND a.exercise.id=:exerciseId")
+        return em.createNamedQuery("Approach.delete")
                 .setParameter("id", id)
                 .setParameter("exerciseId", exerciseId)
                 .executeUpdate() != 0;
@@ -57,7 +57,7 @@ public class JpaApproachRepository implements ApproachRepository {
 
     @Override
     public List<Approach> findAll(int exerciseId) {
-        return em.createQuery("SELECT a FROM Approach a WHERE a.exercise.id=:exerciseId", Approach.class)
+        return em.createNamedQuery("Approach.findAll", Approach.class)
                 .setParameter("exerciseId", exerciseId)
                 .getResultList();
     }

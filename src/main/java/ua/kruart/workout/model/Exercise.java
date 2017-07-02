@@ -10,6 +10,11 @@ import java.util.List;
  *
  * @author kruart on 14.05.2017.
  */
+@NamedQueries({
+        @NamedQuery(name = "Exercise.findById", query = "SELECT e FROM Exercise e WHERE e.id=:id AND e.workout.id=:workoutId"),
+        @NamedQuery(name = "Exercise.delete", query = "DELETE FROM Exercise e WHERE e.id=:id AND e.workout.id=:workoutId"),
+        @NamedQuery(name = "Exercise.findAll", query = "SELECT e FROM Exercise e WHERE e.workout.id=:id")
+})
 @Table(name = "tbl_exercise")
 @Entity
 public class Exercise extends BaseEntity {

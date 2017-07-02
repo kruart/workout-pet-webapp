@@ -34,25 +34,22 @@ public class JpaWorkoutRepository implements WorkoutRepository {
 
     @Override
     public Workout findById(int workoutId) {
-//        TypedQuery<Workout> query = this.entityManager.createQuery("SELECT o FROM Workout o LEFT JOIN FETCH o.exerciseList WHERE o.id = " + workoutId, Workout.class);
-//        return query.getResultList().size() > 0 ? query.getSingleResult() : null;
-
         return entityManager.find(Workout.class, workoutId);
     }
 
     @Override
     @Transactional
     public boolean delete(int workoutId) {
-//        entityManager.createQuery("DELETE FROM Workout w WHERE w.id=:id").setParameter("id", workoutId).executeUpdate();
         return entityManager
-                .createQuery("DELETE FROM Workout w WHERE w.id=" + workoutId)
+                .createNamedQuery("Workout.delete")
+                .setParameter("workoutId", workoutId)
                 .executeUpdate() != 0;
     }
 
     @Override
     public List<Workout> findAll() {
         return entityManager
-                .createQuery("SELECT w from Workout w ORDER BY w.startWorkout DESC", Workout.class)
+                .createNamedQuery("Workout.findAll", Workout.class)
                 .getResultList();
     }
 }

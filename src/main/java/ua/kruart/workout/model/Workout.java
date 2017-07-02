@@ -11,6 +11,10 @@ import java.util.List;
  *
  * @author kruart on 15.05.2017.
  */
+@NamedQueries({
+        @NamedQuery(name = "Workout.delete", query = "DELETE FROM Workout w WHERE w.id=:workoutId"),
+        @NamedQuery(name = "Workout.findAll", query = "SELECT w FROM Workout w ORDER BY w.startWorkout DESC")
+})
 @Table(name = "tbl_workout")
 @Entity
 public class Workout extends NamedEntity {

@@ -14,3 +14,4 @@
 --- Rewrite xml-conf on java conf
 --- Migrate to Spring Boot
 --- Migrate to MongoDB
++++ change sql queries on JPA Named Queries
