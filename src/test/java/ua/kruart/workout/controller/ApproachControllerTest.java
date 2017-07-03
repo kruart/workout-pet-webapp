@@ -54,7 +54,7 @@ public class ApproachControllerTest extends AbstractControllerTest {
     public void testCreateOrUpdateApproach() throws Exception {
         mockMvc.perform(post("/approach/saveChanges").param("id", "25")
                 .param("eid", "7")
-                .param("time", "23:33")
+                .param("time", "23")
                 .param("repeats", "8")
                 .param("weight", "72.8")
                 .param("distance", "0"))
