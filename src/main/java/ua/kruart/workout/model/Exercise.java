@@ -3,7 +3,8 @@ package ua.kruart.workout.model;
 import ua.kruart.workout.model.base.BaseEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -30,6 +31,7 @@ public class Exercise extends BaseEntity {
      * Description of the exercise
      */
     @Embedded
+    @Valid
     private ExerciseDescription description;
 
     /**
@@ -47,7 +49,7 @@ public class Exercise extends BaseEntity {
      * Comment of the exercise
      */
     @Column(name = "comment")
-    @Max(value = 256)
+    @Size(max = 256)
     private String comment;
 
     public Exercise() {}

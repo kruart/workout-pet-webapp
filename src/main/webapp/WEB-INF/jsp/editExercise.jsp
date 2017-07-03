@@ -9,34 +9,72 @@
 
     <br><br><br>
     <div class="container">
-        <form action="<c:url value="/exercise/saveChanges"/>" method="post">
-            <input type="hidden" value="${exerciseModel.workout.id}" name="workoutId">
-            <input type="hidden" value="${exerciseModel.id}" name="id"><br>
+        <form:form method="post" modelAttribute="exerciseModel" action="/exercise/saveChanges">
+            <input type="hidden" value="${exerciseModel.workout.id}" name="wid">
+            <form:hidden path="id"/><br>
             <div class="form-check form-check-inline">
-                <label class="form-check-label"><input type="checkbox" class="form-check-input" value="${exerciseModel.conf.distanceMeasure}" name="distanceMeasure"> <spring:message code="message.distance"/></label><br>
-            </div>
-            <div class="form-check form-check-inline">
-                <label class="form-check-label"><input type="checkbox" class="form-check-input" value="${exerciseModel.conf.repeatMeasure}" name="repeatMeasure"> <spring:message code="message.repeats"/></label><br>
-            </div>
-            <div class="form-check form-check-inline">
-                <label class="form-check-label"><input type="checkbox" class="form-check-input" value="${exerciseModel.conf.timeMeasure}" name="timeMeasure"> <spring:message code="message.time"/></label><br>
-            </div>
-            <div class="form-check form-check-inline">
-                <label class="form-check-label"><input type="checkbox" class="form-check-input" value="${exerciseModel.conf.weightMeasure}" name="weightMeasure"> <spring:message code="message.weight"/></label><br>
+                <form:label path="conf.distanceMeasure" class="form-check-label">
+                    <form:checkbox path="conf.distanceMeasure" class="form-check-input"/>
+                    <spring:message code="message.distance"/>
+                </form:label>
             </div>
 
+            <div class="form-check form-check-inline">
+                <form:label path="conf.repeatMeasure" class="form-check-label">
+                    <form:checkbox path="conf.repeatMeasure" class="form-check-input"/>
+                    <spring:message code="message.repeats"/>
+                </form:label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <form:label path="conf.timeMeasure" class="form-check-label">
+                    <form:checkbox path="conf.timeMeasure" class="form-check-input"/>
+                    <spring:message code="message.time"/>
+                </form:label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <form:label path="conf.weightMeasure" class="form-check-label">
+                    <form:checkbox path="conf.weightMeasure" class="form-check-input"/>
+                    <spring:message code="message.weight"/>
+                </form:label>
+            </div>
             <br>
-            <label><spring:message code="message.name"/><input type="text" class="form-control" value="${exerciseModel.description.name}" name="name"></label><br>
-            <label><spring:message code="message.complexity"/><input type="text" class="form-control" value="${exerciseModel.description.complexity}" name="complexity"></label><br>
-            <label><spring:message code="message.type"/> <input type="text" class="form-control" value="${exerciseModel.description.type}" name="type"></label><br>
-            <label><spring:message code="message.desc"/> <input type="text" class="form-control" value="${exerciseModel.description.description}" name="desc"></label><br>
-            <label> <spring:message code="message.comment"/> <input type="text" class="form-control" value="${exerciseModel.comment}" name="comment"></label><br>
-            <spring:message code="message.muscles"/> <br>
+            <form:label path="description.name">
+                <spring:message code="message.name"/>
+                <form:input path="description.name" class="form-control"/>
+            </form:label>
+            <b class="errorMessage"><form:errors path="description.name"/></b>
+            <br>
 
-            <c:if test="${exerciseModel.description.muscles == null}">
-                <label><spring:message code="message.musclesMain"/>: <input type="text" class="form-control" value="" name="main"></label><br>
-                <label><spring:message code="message.musclesOptional"/>: <input type="text" class="form-control" value="" name="optional"></label><br>
-            </c:if>
+            <form:label path="description.complexity">
+                <spring:message code="message.complexity"/>
+                <form:input path="description.complexity" class="form-control"/>
+            </form:label>
+            <b class="errorMessage"><form:errors path="description.complexity"/></b>
+            <br>
+
+            <form:label path="description.type">
+                <spring:message code="message.type"/>
+                <form:input path="description.type" class="form-control"/>
+            </form:label>
+            <b class="errorMessage"><form:errors path="description.type"/></b>
+            <br>
+
+            <form:label path="description.description">
+                <spring:message code="message.desc"/>
+                <form:input path="description.description" class="form-control"/>
+            </form:label>
+            <br>
+
+            <form:label path="comment">
+                <spring:message code="message.comment"/>
+                <form:input path="comment" class="form-control"/>
+            </form:label>
+            <b class="errorMessage"><form:errors path="comment"/></b>
+            <br>
+
+            <spring:message code="message.muscles"/> <br>
 
             <c:forEach items="${exerciseModel.description.muscles}" var="muscle">
                 <c:choose>
@@ -50,17 +88,23 @@
                 </c:choose>
             </c:forEach>
 
+            <c:if test="${!exerciseModel.description.muscles.containsValue('main')}">
+                <label><spring:message code="message.musclesMain"/>: <input type="text" class="form-control" value="" name="main"></label><br>
+            </c:if>
+
+            <c:if test="${!exerciseModel.description.muscles.containsValue('optional')}">
+                <label><spring:message code="message.musclesOptional"/>: <input type="text" class="form-control" value="" name="optional"></label><br>
+            </c:if>
+
             <button type="submit" class="btn btn-success"><spring:message code="message.saveBtn"/></button>
             <button onclick="window.history.back()" class="btn btn-warning"><spring:message code="message.cancelBtn"/></button>
-        </form>
+        </form:form>
     </div>
 
     <jsp:include page="fragments/footer.jsp"/>
 
     <script>
         $(document).ready(function () {
-            $('input:checkbox[value=true]').prop('checked', 'checked');
-
             $('input:checkbox').click(function (e) {
                 $(this).attr('value', this.checked ? 'true' : 'false');
             });

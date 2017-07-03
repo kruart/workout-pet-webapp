@@ -34,4 +34,12 @@ public final class Checks {
     public static void checkParameter(Object check, int id) throws InvalidParameterException {
         checkParameter(check != null, id);
     }
+
+    /**
+     * Verifies if specified string is null or empty
+     * @param str
+     */
+    public static boolean paramIsEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
 }
