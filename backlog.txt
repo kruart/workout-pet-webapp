@@ -3,7 +3,7 @@
 +++ Add Approach realizations dao, service, controller layers
 +++ Add web-controller tests
 +++ setup Jenkins
---- Add validation (hibernate + spring)
++++ Add validation (hibernate + spring)
 --- Handles error
 --- ??hibernate cache
 +++ Bundles support
