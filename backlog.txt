@@ -4,7 +4,7 @@
 +++ Add web-controller tests
 +++ setup Jenkins
 +++ Add validation (hibernate + spring)
---- Handles error
++++ Handles error
 --- ??hibernate cache
 +++ Bundles support
 +++ Add opportunity to change locale

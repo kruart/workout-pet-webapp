@@ -15,11 +15,11 @@
             classpath:spring/spring-db.xml
         </param-value>
     </context-param>
-    
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
+
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -27,9 +27,15 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:spring/spring-mvc.xml</param-value>
         </init-param>
+        <!--It allows to trigger GlobalControllerExceptionHandler.handleAllEx() method when HttpStatus.NOT_FOUND(404) is happened-->
+        <init-param>
+            <param-name>throwExceptionIfNoHandlerFound</param-name>
+            <param-value>true</param-value>
+        </init-param>
+
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
