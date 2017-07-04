@@ -73,7 +73,7 @@ public class ApproachServiceImplTest {
     public void testGetApproachByIdsSuccess() throws Exception {
         Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID);
         assertEquals(45.7, approachById.getWeight(), 0.01);
-        assertEquals(8, approachById.getRepeats());
+        assertEquals(Integer.valueOf(8), approachById.getRepeats());
     }
 
     @Test(expected = InvalidParameterException.class)
@@ -89,7 +89,7 @@ public class ApproachServiceImplTest {
 
 
     public Approach getTestData() {
-        return new Approach(null, 5, 99.9f, 0, 0);
+        return new Approach(null, 5, 99.9f, 0.0f, 0);
     }
 
 }

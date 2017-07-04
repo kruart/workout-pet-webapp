@@ -4,6 +4,7 @@ import ua.kruart.workout.model.base.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * Describes one physical approach during the exercise
@@ -22,29 +23,33 @@ public class Approach extends BaseEntity {
     /**
      * Repeats in one approach
      */
-    @Column(name = "repeats")
+    @Column(name = "repeats", nullable = false, columnDefinition = "int default 100")
     @Min(value = 0, message = "The value must be positive")
-    private int repeats;
+    @NotNull
+    private Integer repeats;
 
     /**
      * Tonnage of the current approach
      */
     @Column(name = "weight")
     @Min(value = 0, message = "The value must be positive")
-    private float weight;
+    @NotNull
+    private Float weight;
 
     /**
      * Distance of the current approach
      */
     @Column(name = "distance")
     @Min(value = 0, message = "The value must be positive")
-    private float distance;
+    @NotNull
+    private Float distance;
 
     /**
      * Time of execution a current approach in minutes
      */
     @Column(name = "time")
     @Min(value = 0, message = "The value must be positive")
+    @NotNull
     private Integer time;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -53,7 +58,7 @@ public class Approach extends BaseEntity {
 
     public Approach() {}
 
-    public Approach(Integer id, int repeats, float weight, float distance, Integer time) {
+    public Approach(Integer id, Integer repeats, Float weight, Float distance, Integer time) {
         super(id);
         this.repeats = repeats;
         this.weight = weight;
@@ -61,32 +66,32 @@ public class Approach extends BaseEntity {
         this.time = time;
     }
 
-    public Approach(Integer id, int repeats, float weight, float distance, Integer time, Exercise exercise) {
+    public Approach(Integer id, Integer repeats, Float weight, Float distance, Integer time, Exercise exercise) {
         this(id, repeats, weight, distance, time);
         this.exercise = exercise;
     }
 
-    public int getRepeats() {
+    public Integer getRepeats() {
         return repeats;
     }
 
-    public void setRepeats(int repeats) {
+    public void setRepeats(Integer repeats) {
         this.repeats = repeats;
     }
 
-    public float getWeight() {
+    public Float getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(Float weight) {
         this.weight = weight;
     }
 
-    public float getDistance() {
+    public Float getDistance() {
         return distance;
     }
 
-    public void setDistance(float distance) {
+    public void setDistance(Float distance) {
         this.distance = distance;
     }
 

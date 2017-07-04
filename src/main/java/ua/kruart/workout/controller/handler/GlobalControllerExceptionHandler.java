@@ -26,13 +26,13 @@ public class GlobalControllerExceptionHandler {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ModelAndView handleInvalidParamEx(HttpServletRequest req, InvalidParameterException e) {
         LOGGER.error("Exception at request " + req.getRequestURL());
-        return new ModelAndView("exceptions/error").addObject("errMsg", e.getMessage());
+        return new ModelAndView("exceptions/error").addObject("errMsg", "Something was wrong: " + e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(Exception.class)
     public ModelAndView handleAllEx(HttpServletRequest req, Exception e) {
         LOGGER.error("Exception at request " + req.getRequestURL());
-        return new ModelAndView("exceptions/error").addObject("errMsg", e.getMessage());
+        return new ModelAndView("exceptions/error").addObject("errMsg", "Something was wrong: " + e.getMessage());
     }
 }
