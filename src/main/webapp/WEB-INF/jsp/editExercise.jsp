@@ -9,8 +9,8 @@
 
     <br><br><br>
     <div class="container">
-        <form:form method="post" modelAttribute="exerciseModel" action="/exercise/saveChanges">
-            <input type="hidden" value="${exerciseModel.workout.id}" name="wid">
+        <form:form method="post" modelAttribute="exerciseModel" action="/exercise/saveChanges/workout/${wid}">
+            <input type="hidden" value="${wid}" name="wid">
             <form:hidden path="id"/><br>
             <div class="form-check form-check-inline">
                 <form:label path="conf.distanceMeasure" class="form-check-label">

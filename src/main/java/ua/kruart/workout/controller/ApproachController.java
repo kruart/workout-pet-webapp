@@ -24,24 +24,24 @@ public class ApproachController {
     @Autowired
     private ApproachService service;
 
-    @GetMapping()
-    public ModelAndView getAllApproaches(@RequestParam("eid") Integer exerciseId) {
+    @GetMapping("/all/exercise/{eid}")
+    public ModelAndView getAllApproaches(@PathVariable("eid") Integer exerciseId) {
         List<Approach> approaches = service.getAll(exerciseId);
         return new ModelAndView("approachList", "approachList", approaches).addObject("eid", exerciseId);
     }
 
-    @GetMapping("create")
-    public ModelAndView createApproach(@RequestParam("eid") Integer exerciseId) {
-        return new ModelAndView("editApproach", "approachModel", new Approach(null, 0, 0F, 0F, 0)).addObject("eid", exerciseId);
+    @GetMapping("/create/exercise/{eid}")
+    public ModelAndView createApproach(@PathVariable("eid") Integer exerciseId) {
+        return new ModelAndView("editApproach", "approachModel", new Approach(null, 0, 0.0f, 0.0f, 0)).addObject("eid", exerciseId);
     }
 
-    @GetMapping("update/{id}")
-    public ModelAndView updateApproach(@PathVariable Integer id, @RequestParam("eid") Integer exerciseId) {
+    @GetMapping("/update/{id}/exercise/{eid}")
+    public ModelAndView updateApproach(@PathVariable Integer id, @PathVariable("eid") Integer exerciseId) {
         return new ModelAndView("editApproach", "approachModel", service.get(id, exerciseId)).addObject("eid", exerciseId);
     }
 
-    @PostMapping("saveChanges")
-    public String createOrUpdate(@RequestParam(name = "eid") Integer exerciseId,
+    @PostMapping("/saveChanges/exercise/{eid}")
+    public String createOrUpdate(@PathVariable(name = "eid") Integer exerciseId,
                                  @Valid @ModelAttribute("approachModel") Approach approach, BindingResult result, ModelMap map) {
         if (result.hasErrors()) {
             map.addAttribute("eid", exerciseId);
@@ -54,12 +54,13 @@ public class ApproachController {
             service.update(approach, exerciseId);
         }
 
-        return "redirect:/approach?eid=" + exerciseId;
+        return "redirect:/approach/all/exercise/" + exerciseId;
     }
 
-    @GetMapping("delete/{id}")
-    public String removeApproach(@PathVariable Integer id, @RequestParam("eid") Integer exerciseId) {
+    @GetMapping("/delete/{id}/exercise/{eid}")
+    public String removeApproach(@PathVariable Integer id, @PathVariable("eid") Integer exerciseId) {
         service.delete(id, exerciseId);
-        return "redirect:/approach?eid=" + exerciseId;
+        return "redirect:/approach/all/exercise/" + exerciseId;
     }
 }
+

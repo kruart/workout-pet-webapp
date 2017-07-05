@@ -28,33 +28,32 @@ public class ExerciseController {
     @Autowired
     private ExerciseService service;
 
-    @GetMapping
-    public ModelAndView getAllExercise(@RequestParam("wid") Integer workoutId) {
+    @GetMapping(value = "/all/workout/{wid}")
+    public ModelAndView getAllExercise(@PathVariable("wid") Integer workoutId) {
         return new ModelAndView("exerciseList", "exerciseList", service.getAll(workoutId)).addObject("wid", workoutId);
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String removeExercise(@PathVariable Integer id, @RequestParam("wid") Integer wid) {
-        service.delete(id, wid);
-        return "redirect:/exercise?wid=" + wid;
+    @RequestMapping(value = "/delete/{id}/workout/{wid}", method = RequestMethod.GET)
+    public String removeExercise(@PathVariable Integer id, @PathVariable("wid") Integer workoutId) {
+        service.delete(id, workoutId);
+        return "redirect:/exercise/all/workout/" + workoutId;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView createExercise(@RequestParam("wid") Integer workoutId) {
-        Workout workout = new Workout();
-        workout.setId(workoutId);
+    @RequestMapping(value = "/create/workout/{wid}", method = RequestMethod.GET)
+    public ModelAndView createExercise(@PathVariable("wid") Integer workoutId) {
         return new ModelAndView("editExercise")
-                .addObject("exerciseModel", new Exercise(null, new ExerciseConfiguration(), new ExerciseDescription(), null, workout, ""));
+                .addObject("exerciseModel", new Exercise(null, new ExerciseConfiguration(), new ExerciseDescription(), null, null, ""))
+                .addObject("wid", workoutId);
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public ModelAndView updateExercise(@PathVariable Integer id, @RequestParam("wid") Integer workoutId) {
+    @RequestMapping(value = "/update/{id}/workout/{wid}", method = RequestMethod.GET)
+    public ModelAndView updateExercise(@PathVariable Integer id, @PathVariable("wid") Integer workoutId) {
         return new ModelAndView("editExercise")
-                .addObject("exerciseModel", service.get(id, workoutId));
+                .addObject("exerciseModel", service.get(id, workoutId)).addObject("wid", workoutId);
     }
 
-    @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
-    public String createOrUpdate(@RequestParam("wid") Integer workoutId, @Valid @ModelAttribute("exerciseModel") Exercise exerciseModel,
+    @RequestMapping(value = "/saveChanges/workout/{wid}", method = RequestMethod.POST)
+    public String createOrUpdate(@PathVariable("wid") Integer workoutId, @Valid @ModelAttribute("exerciseModel") Exercise exerciseModel,
                                  BindingResult result, ModelMap map, HttpServletRequest req) {
         if (result.hasErrors()) {
             map.addAttribute("wid", workoutId);
@@ -68,7 +67,7 @@ public class ExerciseController {
         } else {
             service.update(exerciseModel, workoutId);
         }
-        return "redirect:/exercise?wid=" + workoutId;
+        return "redirect:/exercise/all/workout/" + workoutId;
     }
 
     private Map<Muscle, String> getMusclesMapFromReq(HttpServletRequest req) {

@@ -26,7 +26,7 @@
                 <tr>
 
                     <td>${theCount.index + 1}</td>
-                    <td><a href="<c:url value="/exercise?wid=${workout.id}"/>">${workout.name}</a></td>
+                    <td><a href="<c:url value="/exercise/all/workout/${workout.id}"/>">${workout.name}</a></td>
                     <td>${workout.startWorkout}</td>
                     <td>${workout.endWorkout}</td>
                     <td><a class="btn btn-warning" href="<c:url value="/workout/update/${workout.id}"/>"><spring:message code="message.editBtn"/></a></td>

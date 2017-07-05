@@ -9,7 +9,7 @@
 
     <br><br><br>
     <div class="container">
-        <form:form  method="post" modelAttribute="approachModel" action="/approach/saveChanges" >
+        <form:form  method="post" modelAttribute="approachModel" action="/approach/saveChanges/exercise/${eid}" >
             <div class="form-group">
                 <input type="hidden" value="${eid}" name="eid"><br>
                 <form:hidden path="id"/>

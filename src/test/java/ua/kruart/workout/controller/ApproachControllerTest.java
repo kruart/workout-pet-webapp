@@ -22,7 +22,7 @@ public class ApproachControllerTest extends AbstractControllerTest {
 
     @Test
     public void getAllApproach() throws Exception{
-        mockMvc.perform(get("/approach").param("eid", "7"))
+        mockMvc.perform(get("/approach/all/exercise/7"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("approachList"))
@@ -32,7 +32,7 @@ public class ApproachControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreateApproach() throws Exception {
-        mockMvc.perform(get("/approach/create").param("eid", "7"))
+        mockMvc.perform(get("/approach/create/exercise/7"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("editApproach"))
@@ -42,7 +42,7 @@ public class ApproachControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdateApproach() throws Exception{
-        mockMvc.perform(get("/approach/update/25").param("eid", "7"))
+        mockMvc.perform(get("/approach/update/25/exercise/7"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("editApproach"))
@@ -52,7 +52,8 @@ public class ApproachControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreateOrUpdateApproach() throws Exception {
-        mockMvc.perform(post("/approach/saveChanges").param("id", "25")
+        mockMvc.perform(post("/approach/saveChanges/exercise/7")
+                .param("id", "25")
                 .param("eid", "7")
                 .param("time", "23")
                 .param("repeats", "8")
@@ -60,16 +61,16 @@ public class ApproachControllerTest extends AbstractControllerTest {
                 .param("distance", "0"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/approach?eid=7"))
-                .andExpect(redirectedUrl("/approach?eid=7"));
+                .andExpect(view().name("redirect:/approach/all/exercise/7"))
+                .andExpect(redirectedUrl("/approach/all/exercise/7"));
     }
 
     @Test
     public void testRemoveApproach() throws Exception {
-        mockMvc.perform(get("/approach/delete/25").param("eid", "7"))
+        mockMvc.perform(get("/approach/delete/25/exercise/7"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/approach?eid=7"))
-                .andExpect(redirectedUrl("/approach?eid=7"));
+                .andExpect(view().name("redirect:/approach/all/exercise/7"))
+                .andExpect(redirectedUrl("/approach/all/exercise/7"));
     }
 }

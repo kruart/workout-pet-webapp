@@ -10,10 +10,7 @@
 </li>
 <script type="text/javascript">
     function show(lang) {
-        if (window.location.href.indexOf("?") > -1) {
-            window.location.href = window.location.href + '&lang=' + lang; //if params exists
-        } else {
-            window.location.href = window.location.href.split('?')[0] + '?lang=' + lang;    //if params no exists
-        }
+        window.location.href = window.location.href.split('?')[0] + '?lang=' + lang;
+
     }
 </script>

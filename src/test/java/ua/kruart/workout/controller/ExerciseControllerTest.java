@@ -22,7 +22,7 @@ public class ExerciseControllerTest extends AbstractControllerTest {
 
     @Test
     public void getAllExercise() throws Exception{
-        mockMvc.perform(get("/exercise").param("wid", "1"))
+        mockMvc.perform(get("/exercise/all/workout/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("exerciseList"))
@@ -32,7 +32,7 @@ public class ExerciseControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreateExercise() throws Exception {
-        mockMvc.perform(get("/exercise/create").param("wid", "1"))
+        mockMvc.perform(get("/exercise/create/workout/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("editExercise"))
@@ -42,7 +42,7 @@ public class ExerciseControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdateExercise() throws Exception{
-        mockMvc.perform(get("/exercise/update/3").param("wid", "1"))
+        mockMvc.perform(get("/exercise/update/3/workout/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("editExercise"))
@@ -52,7 +52,7 @@ public class ExerciseControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreateOrUpdateExercise() throws Exception {
-        mockMvc.perform(post("/exercise/saveChanges").param("id", "3")
+        mockMvc.perform(post("/exercise/saveChanges/workout/1").param("id", "3")
                 .param("wid", "1")
                 .param("conf.weightMeasure", "true")
                 .param("conf.timeMeasure", "false")
@@ -67,16 +67,16 @@ public class ExerciseControllerTest extends AbstractControllerTest {
                 .param("optional", "SHOULDERS"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/exercise?wid=1"))
-                .andExpect(redirectedUrl("/exercise?wid=1"));
+                .andExpect(view().name("redirect:/exercise/all/workout/1"))
+                .andExpect(redirectedUrl("/exercise/all/workout/1"));
     }
 
     @Test
     public void testRemoveExercise() throws Exception {
-        mockMvc.perform(get("/exercise/delete/3").param("wid", "1"))
+        mockMvc.perform(get("/exercise/delete/3/workout/1"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/exercise?wid=1"))
-                .andExpect(redirectedUrl("/exercise?wid=1"));
+                .andExpect(view().name("redirect:/exercise/all/workout/1"))
+                .andExpect(redirectedUrl("/exercise/all/workout/1"));
     }
 }

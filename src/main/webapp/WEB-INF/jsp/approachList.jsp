@@ -8,7 +8,7 @@
 
     <br><br><br>
     <div class="container">
-        <a class="btn btn-primary" href="<c:url value="/approach/create?eid=${eid}"/>"><spring:message code="message.addBtn"/></a>
+        <a class="btn btn-primary" href="<c:url value="/approach/create/exercise/${eid}"/>"><spring:message code="message.addBtn"/></a>
         <table class="table">
             <thead class="thead-inverse">
             <tr>
@@ -29,8 +29,8 @@
                     <td>${approach.weight}</td>
                     <td>${approach.distance}</td>
                     <td>${approach.time}</td>
-                    <td><a class="btn btn-warning" href="<c:url value="/approach/update/${approach.id}?eid=${eid}"/>"><spring:message code="message.editBtn"/></a></td>
-                    <td><a class="btn btn-danger" href="<c:url value="/approach/delete/${approach.id}?eid=${eid}"/>"><spring:message code="message.deleteBtn"/></a></td>
+                    <td><a class="btn btn-warning" href="<c:url value="/approach/update/${approach.id}/exercise/${eid}"/>"><spring:message code="message.editBtn"/></a></td>
+                    <td><a class="btn btn-danger" href="<c:url value="/approach/delete/${approach.id}/exercise/${eid}"/>"><spring:message code="message.deleteBtn"/></a></td>
                 </tr>
             </c:forEach>
         </table>
