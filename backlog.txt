@@ -5,11 +5,17 @@
 +++ setup Jenkins
 +++ Add validation (hibernate + spring)
 +++ Handles error
---- ??hibernate cache
 +++ Bundles support
 +++ Add opportunity to change locale
---- Create login page
---- Add spring security(in-memory)
++++ Create login page
++++ Add spring security(in-memory)
+--- ??hibernate cache
+--- add User entity
+--- add bcrypt password + sault
+--- add UserDetailsService impl
+--- add to show logged username in every request
+--- add csrf
+--- add rememberMe
 --- Add spring oauth(github)
 --- Rewrite xml-conf on java conf
 --- Migrate to Spring Boot
