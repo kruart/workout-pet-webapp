@@ -14,7 +14,7 @@
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
         <form-login login-processing-url="/performLogin" username-parameter="wUsername" password-parameter="wPassword"
-                    login-page="/login"/>
+                    login-page="/login" authentication-failure-url="/login?error"/>
         <logout logout-success-url="/"/> <!-- logout tag automatically create /logout url-->
     </http>
 

@@ -24,6 +24,11 @@
 							<input type="checkbox"> <spring:message code="message.rememberMe"/>
 						</label>
 					</div>
+					<div>
+                        <c:if test="${param.error != null}">
+                            <b class="errorMessage"><spring:message code="message.invalidCredentials"/></b>
+                        </c:if>
+					</div>
 
 					<button type="submit" class="btn btn-primary form-control">Login</button>
 				</form>
