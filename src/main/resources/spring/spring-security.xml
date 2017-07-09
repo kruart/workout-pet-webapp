@@ -1,10 +1,14 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <beans:bean id="customFailureHandler" class="ua.kruart.workout.controller.handler.UsernameRememberingAuthenticationFailureHandler"
+    p:redirectTarget="/login"/>
 
     <http pattern="/resources/**" security="none"/>
 
@@ -14,7 +18,7 @@
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
         <form-login login-processing-url="/performLogin" username-parameter="wUsername" password-parameter="wPassword"
-                    login-page="/login" authentication-failure-url="/login?error"/>
+                    login-page="/login" authentication-failure-handler-ref="customFailureHandler"/>
         <logout logout-success-url="/"/> <!-- logout tag automatically create /logout url-->
     </http>
 

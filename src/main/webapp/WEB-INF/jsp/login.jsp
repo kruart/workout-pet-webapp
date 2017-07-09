@@ -12,7 +12,7 @@
 				<br>
 				<form method="post" action="<c:url value="/performLogin"/>">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="<spring:message code="message.enterUsername"/>" name="wUsername" value="${username}">
+						<input type="text" class="form-control" placeholder="<spring:message code="message.enterUsername"/>" name="wUsername" value="${param.username}">
 					</div>
 
 					<div class="form-group">
