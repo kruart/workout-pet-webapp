@@ -7,6 +7,7 @@ import ua.kruart.workout.model.base.NamedEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.EnumSet;
 import java.util.Set;
 
 /**
@@ -30,7 +31,7 @@ public class User extends NamedEntity {
 
     @Column(name = "password", nullable = false)
     @NotEmpty
-    @Length(min = 5)
+    @Length(min = 5, message = "min length is 5 characters")
     private String password;
 
     @Column(name = "enabled", nullable = false)
@@ -54,6 +55,10 @@ public class User extends NamedEntity {
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
+    }
+
+    public User(Integer id, String name, String email, String password, boolean enabled, Role role, Role... roles) {
+        this(id, name, email, password, true, EnumSet.of(role, roles));
     }
 
     public String getEmail() {

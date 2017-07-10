@@ -9,10 +9,15 @@
 		<div class="row justify-content-md-center">
 			<div class="jumbotron" style="margin-top: 150px">
 				<h3><spring:message code="message.signIn"/></h3>
+				<h5>
+					<c:if test="${param.afterR != null}">
+						<b class="successMessageProcess"><spring:message code="message.afterRegister"/></b>
+					</c:if>
+				</h5>
 				<br>
 				<form method="post" action="<c:url value="/performLogin"/>">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="<spring:message code="message.enterUsername"/>" name="wUsername" value="${param.username}">
+						<input type="text" class="form-control" placeholder="<spring:message code="message.email"/>" name="wUsername" value="${param.username}">
 					</div>
 
 					<div class="form-group">

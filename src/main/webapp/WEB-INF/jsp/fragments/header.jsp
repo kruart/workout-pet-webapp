@@ -37,6 +37,9 @@
                 <a class="nav-link" href="#">Username</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/register"/>">Register</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
             </li>
         </ul>
