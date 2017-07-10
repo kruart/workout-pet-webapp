@@ -14,6 +14,11 @@ import java.util.Set;
  *
  * @author kruart on 10.07.2017.
  */
+@NamedQueries({
+        @NamedQuery(name = "User.delete", query = "DELETE FROM User u WHERE u.id=:id"),
+        @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
+        @NamedQuery(name = "User.findAllSorted", query = "SELECT DISTINCT(u) FROM User u LEFT JOIN FETCH u.roles ORDER BY u.name, u.email"),
+})
 @Table(name = "tbl_users")
 @Entity
 public class User extends NamedEntity {
