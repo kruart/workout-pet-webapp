@@ -30,7 +30,7 @@ public class ApproachServiceImplTest {
     private ApproachService service;
 
     private static final int APPROACH_CORRECT_ID = 25;
-    private static final int EXERCISE_CORRECT_ID = 7;
+    private static final int EXERCISE_CORRECT_ID = 9;
     private static final int EXERCISE_INCORRECT_ID = 99;
 
     @Test
@@ -72,7 +72,7 @@ public class ApproachServiceImplTest {
     @Test
     public void testGetApproachByIdsSuccess() throws Exception {
         Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID);
-        assertEquals(45.7, approachById.getWeight(), 0.01);
+        assertEquals(15.2, approachById.getWeight(), 0.01);
         assertEquals(Integer.valueOf(8), approachById.getRepeats());
     }
 

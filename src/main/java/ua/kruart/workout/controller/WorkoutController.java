@@ -15,6 +15,8 @@ import ua.kruart.workout.service.WorkoutService;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 
+import static ua.kruart.workout.security.AuthorizedUser.getLoggedUserId;
+
 /**
  * Handles workout-related requests
  *
@@ -29,7 +31,7 @@ public class WorkoutController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAllWorkouts(Model model) {
-        model.addAttribute("workoutList", service.getAll());
+        model.addAttribute("workoutList", service.getAll(getLoggedUserId()));
         return "workoutList";
     }
 
@@ -40,7 +42,7 @@ public class WorkoutController {
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public ModelAndView updateWorkout(@PathVariable Integer id) {
-        return new ModelAndView("editWorkout").addObject("workoutModel", service.get(id));
+        return new ModelAndView("editWorkout").addObject("workoutModel", service.get(id, getLoggedUserId()));
     }
 
     @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
@@ -50,16 +52,16 @@ public class WorkoutController {
         }
 
         if (workoutModel.isNew()) {
-            service.save(workoutModel);
+            service.save(workoutModel, getLoggedUserId());
         } else {
-            service.update(workoutModel);
+            service.update(workoutModel, getLoggedUserId());
         }
         return "redirect:/workout";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String removeWorkout(@PathVariable Integer id) {
-        service.delete(id);
+        service.delete(id, getLoggedUserId());
         return "redirect:/workout";
     }
 }

@@ -20,29 +20,29 @@ public class WorkoutServiceImpl implements WorkoutService {
     private WorkoutRepository repository;
 
     @Override
-    public Workout save(Workout workout) {
-        return repository.save(workout);
+    public Workout save(Workout workout, int userId) {
+        return repository.save(workout, userId);
     }
 
     @Override
-    public void update(Workout workout) {
-        Checks.checkParameter(repository.save(workout), workout.getId());
+    public void update(Workout workout, int userId) {
+        Checks.checkParameter(repository.save(workout, userId), workout.getId());
     }
 
     @Override
-    public void delete(int id) {
-        Checks.checkParameter(repository.delete(id), id);
+    public void delete(int id, int userId) {
+        Checks.checkParameter(repository.delete(id, userId), id);
     }
 
     @Override
-    public Workout get(int id) {
-        Workout byId = repository.findById(id);
+    public Workout get(int id, int userId) {
+        Workout byId = repository.findById(id, userId);
         Checks.checkParameter(byId, id);
         return byId;
     }
 
     @Override
-    public List<Workout> getAll() {
-        return repository.findAll();
+    public List<Workout> getAll(int userId) {
+        return repository.findAll(userId);
     }
 }

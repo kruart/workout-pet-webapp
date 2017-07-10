@@ -28,9 +28,9 @@ import static org.junit.Assert.assertNotEquals;
 @ActiveProfiles("hsqldb")
 public class ExerciseServiceImplTest {
 
-    private static final int EXERCISE_CORRECT_ID = 7;
-    private static final int EXERCISE_INCORRECT_ID = 3;
-    private static int WORKOUT_CORRECT_ID = 2;
+    private static final int EXERCISE_CORRECT_ID = 9;
+    private static final int EXERCISE_INCORRECT_ID = 12;
+    private static int WORKOUT_CORRECT_ID = 3;
     private static int WORKOUT_INCORRECT_ID = 99;
     @Autowired
     private ExerciseService service;
@@ -62,9 +62,9 @@ public class ExerciseServiceImplTest {
 
     @Test
     public void testDeleteSuccess() throws Exception {
-        assertEquals("Size of list: 2", 2, service.getAll(WORKOUT_CORRECT_ID).size());
+        assertEquals("Size of list: 3", 3, service.getAll(WORKOUT_CORRECT_ID).size());
         service.delete(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID);
-        assertEquals("Size of list after delete: 1", 1, service.getAll(WORKOUT_CORRECT_ID).size());
+        assertEquals("Size of list after delete: 2", 2, service.getAll(WORKOUT_CORRECT_ID).size());
     }
 
     @Test(expected = InvalidParameterException.class)
@@ -76,7 +76,7 @@ public class ExerciseServiceImplTest {
     public void testGetSuccess() throws Exception {
         Exercise exercise = service.get(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID);
         assertEquals((Integer) EXERCISE_CORRECT_ID, exercise.getId());
-        assertEquals("Штанга на біцепс", exercise.getDescription().getName());
+        assertEquals("Розводка гантель", exercise.getDescription().getName());
     }
 
     @Test(expected = InvalidParameterException.class)
@@ -86,7 +86,7 @@ public class ExerciseServiceImplTest {
 
     @Test
     public void testGetAll() throws Exception {
-        assertEquals(2, service.getAll(WORKOUT_CORRECT_ID).size());
+        assertEquals(3, service.getAll(WORKOUT_CORRECT_ID).size());
     }
 
     public Exercise getTestData() {

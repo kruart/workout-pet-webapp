@@ -14,8 +14,8 @@ import java.util.List;
  * @author kruart on 15.05.2017.
  */
 @NamedQueries({
-        @NamedQuery(name = "Workout.delete", query = "DELETE FROM Workout w WHERE w.id=:workoutId"),
-        @NamedQuery(name = "Workout.findAll", query = "SELECT w FROM Workout w ORDER BY w.startWorkout DESC")
+        @NamedQuery(name = "Workout.delete", query = "DELETE FROM Workout w WHERE w.id=:workoutId AND w.user.id=:userId"),
+        @NamedQuery(name = "Workout.findAll", query = "SELECT w FROM Workout w WHERE w.user.id=:userId ORDER BY w.startWorkout DESC")
 })
 @Table(name = "tbl_workout")
 @Entity
@@ -43,7 +43,7 @@ public class Workout extends NamedEntity {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "workout")
     private List<Exercise> exerciseList;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -82,6 +82,14 @@ public class Workout extends NamedEntity {
 
     public void setExerciseList(List<Exercise> exerciseList) {
         this.exerciseList = exerciseList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

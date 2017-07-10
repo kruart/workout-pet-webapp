@@ -43,12 +43,12 @@ public class WorkoutControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdateWorkout() throws Exception {
-        mockMvc.perform(get("/workout/update/1"))
+        mockMvc.perform(get("/workout/update/3"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("editWorkout"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/editWorkout.jsp"))
-                .andExpect(model().attribute("workoutModel", service.get(1)))  //equals only ids
+                .andExpect(model().attribute("workoutModel", service.get(3, 1)))  //equals only ids
                 .andReturn();
     }
 
