@@ -13,7 +13,7 @@
 +++ add User entity
 --- add bcrypt password + sault
 +++ add UserDetailsService impl
---- register newUser
++++ register newUser
 --- update userProfile
 --- add to show logged username in every request
 --- add csrf

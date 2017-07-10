@@ -1,5 +1,6 @@
 package ua.kruart.workout.repository.jpa;
 
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.kruart.workout.model.User;
@@ -38,7 +39,11 @@ public class JpaWorkoutRepository implements WorkoutRepository {
 
     @Override
     public Workout findById(int workoutId, int userId) {
-        return entityManager.find(Workout.class, workoutId);
+        List<Workout> resultList = entityManager.createNamedQuery("Workout.getById", Workout.class)
+                .setParameter("id", workoutId)
+                .setParameter("userId", userId)
+                .getResultList();
+        return DataAccessUtils.singleResult(resultList);
     }
 
     @Override

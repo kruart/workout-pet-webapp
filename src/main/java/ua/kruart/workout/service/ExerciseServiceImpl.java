@@ -22,7 +22,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public Exercise save(Exercise exercise, int workoutId) {
-        Checks.checkParameter(repository.save(exercise, workoutId), exercise.getId());
+        Checks.checkParameter(repository.save(exercise, workoutId), workoutId);
         return exercise;
     }
 
@@ -45,6 +45,8 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public List<Exercise> getAll(int workoutId) {
-        return repository.findAll(workoutId);
+        List<Exercise> exerciseList = repository.findAll(workoutId);
+        Checks.checkParameter(exerciseList != null, workoutId);
+        return exerciseList;
     }
 }

@@ -12,9 +12,16 @@ import javax.validation.constraints.NotNull;
  * @author kruart on 14.05.2017.
  */
 @NamedQueries({
-        @NamedQuery(name = "Approach.findById", query = "SELECT a FROM Approach a WHERE a.id=:id AND a.exercise.id=:exerciseId"),
+        @NamedQuery(name = "Approach.findById",
+                query = "select a from Approach a inner join a.exercise e ON e.id=:exerciseId" +
+                        " inner join e.workout w ON w.id=w.id" +
+                        " inner join w.user u ON u.id=:userId" +
+                        " where a.id=:id"),
         @NamedQuery(name = "Approach.delete", query = "DELETE FROM Approach a WHERE a.id=:id AND a.exercise.id=:exerciseId"),
-        @NamedQuery(name = "Approach.findAll", query = "SELECT a FROM Approach a WHERE a.exercise.id=:exerciseId"),
+        @NamedQuery(name = "Approach.findAll",
+                query = "select a from Approach a inner join a.exercise e ON e.id=:exerciseId" +
+                        " inner join e.workout w ON w.id=w.id " +
+                        "inner join w.user u ON u.id=:userId"),
 })
 @Table(name = "tbl_approach")
 @Entity

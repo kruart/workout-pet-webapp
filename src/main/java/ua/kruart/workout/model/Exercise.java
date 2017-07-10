@@ -13,9 +13,11 @@ import java.util.List;
  * @author kruart on 14.05.2017.
  */
 @NamedQueries({
-        @NamedQuery(name = "Exercise.findById", query = "SELECT e FROM Exercise e WHERE e.id=:id AND e.workout.id=:workoutId"),
+        @NamedQuery(name = "Exercise.findById",
+                query = "SELECT e from Exercise e inner join e.workout w ON w.id=:workoutId inner join w.user u ON u.id=:userId where e.id=:id"),
         @NamedQuery(name = "Exercise.delete", query = "DELETE FROM Exercise e WHERE e.id=:id AND e.workout.id=:workoutId"),
-        @NamedQuery(name = "Exercise.findAll", query = "SELECT e FROM Exercise e WHERE e.workout.id=:id")
+        @NamedQuery(name = "Exercise.findAll",
+                query = "SELECT e from Exercise e inner join e.workout w ON w.id=:workoutId inner join w.user u ON u.id=:userId")
 })
 @Table(name = "tbl_exercise")
 @Entity

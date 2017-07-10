@@ -22,7 +22,7 @@ public class ApproachServiceImpl implements ApproachService {
 
     @Override
     public Approach save(Approach approach, int exerciseId) {
-        Checks.checkParameter(repository.save(approach, exerciseId), approach.getId());
+        Checks.checkParameter(repository.save(approach, exerciseId), exerciseId);
         return approach;
     }
 
@@ -45,6 +45,8 @@ public class ApproachServiceImpl implements ApproachService {
 
     @Override
     public List<Approach> getAll(int exerciseId) {
-        return repository.findAll(exerciseId);
+        List<Approach> approachList = repository.findAll(exerciseId);
+        Checks.checkParameter(approachList != null, exerciseId);
+        return approachList;
     }
 }

@@ -14,6 +14,7 @@ import java.util.List;
  * @author kruart on 15.05.2017.
  */
 @NamedQueries({
+        @NamedQuery(name = "Workout.getById", query = "SELECT w FROM Workout w WHERE w.id=:id AND w.user.id=:userId"),
         @NamedQuery(name = "Workout.delete", query = "DELETE FROM Workout w WHERE w.id=:workoutId AND w.user.id=:userId"),
         @NamedQuery(name = "Workout.findAll", query = "SELECT w FROM Workout w WHERE w.user.id=:userId ORDER BY w.startWorkout DESC")
 })

@@ -42,7 +42,6 @@ public class RootController {
 
     @GetMapping(value = "/register")
     public ModelAndView register() {
-
         return new ModelAndView("profileOrRegister")
                 .addObject("userModel", new User())
                 .addObject("type", "register");
@@ -64,7 +63,7 @@ public class RootController {
         return "profileOrRegister";
     }
 
-    public User prepareForSave(User user) {
+    private User prepareForSave(User user) {
         user.setId(null);
         user.setRoles(new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
         return user;
