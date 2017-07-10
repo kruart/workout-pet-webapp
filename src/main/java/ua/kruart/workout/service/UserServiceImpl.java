@@ -2,10 +2,14 @@ package ua.kruart.workout.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.kruart.workout.model.User;
 import ua.kruart.workout.repository.UserRepository;
+import ua.kruart.workout.security.AuthorizedUser;
 import ua.kruart.workout.util.Checks;
 import ua.kruart.workout.util.exception.InvalidParameterException;
 
@@ -17,7 +21,7 @@ import java.util.List;
  * @author kruart on 10.07.2017.
  */
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
@@ -61,5 +65,14 @@ public class UserServiceImpl implements UserService {
         User user = get(id);
         user.setEnabled(enabled);
         repository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User email = repository.getByEmail(username);
+        if (email == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new AuthorizedUser(email);
     }
 }

@@ -12,7 +12,9 @@
 --- ??hibernate cache
 +++ add User entity
 --- add bcrypt password + sault
---- add UserDetailsService impl
++++ add UserDetailsService impl
+--- register newUser
+--- update userProfile
 --- add to show logged username in every request
 --- add csrf
 --- add rememberMe
