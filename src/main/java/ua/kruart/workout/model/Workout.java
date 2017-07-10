@@ -43,6 +43,10 @@ public class Workout extends NamedEntity {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "workout")
     private List<Exercise> exerciseList;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     public Workout() {}
 
     public Workout(String name, LocalDateTime start) {
