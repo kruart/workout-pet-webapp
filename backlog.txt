@@ -16,7 +16,7 @@
 +++ register newUser
 +++ update userProfile
 +++ add to show logged username in every request
---- add csrf
++++ add csrf
 --- add rememberMe
 --- Add spring oauth(github)
 --- Rewrite xml-conf on java conf

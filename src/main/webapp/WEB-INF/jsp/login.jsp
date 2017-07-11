@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
@@ -16,6 +17,7 @@
 				</h5>
 				<br>
 				<form method="post" action="<c:url value="/performLogin"/>">
+					<sec:csrfInput/>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="<spring:message code="message.email"/>" name="wUsername" value="${param.username}">
 					</div>

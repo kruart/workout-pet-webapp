@@ -40,15 +40,18 @@
                     <a class="nav-link" href="<c:url value="/profile"/>"><sec:authentication property="principal.user.name"/></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
+                    <form method="post" action="<c:url value="/logout"/>">
+                        <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="<spring:message code="message.logout"/>"/>
+                        <sec:csrfInput/>
+                    </form>
                 </li>
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/login"/>">Login</a>
+                    <a class="nav-link" href="<c:url value="/login"/>"><spring:message code="message.signIn"/></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/register"/>">Register</a>
+                    <a class="nav-link" href="<c:url value="/register"/>"><spring:message code="message.register"/></a>
                 </li>
             </sec:authorize>
 
