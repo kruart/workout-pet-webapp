@@ -7,10 +7,10 @@ DELETE FROM tbl_users;
 ALTER SEQUENCE entity_id_seq RESTART WITH 1;
 
 INSERT INTO tbl_users (name, email, password)
-VALUES ('user', 'user@ukr.net', 'password');
+VALUES ('user', 'user@ukr.net', '$2a$10$jI1W6fX.5DZlu.fU/k5.tOAzmTZ7fsaLQw0TUr5DV5b/GLWoHG/Jq');-- pass:password
 
 INSERT INTO tbl_users (name, email, password)
-VALUES ('admin', 'admin@gmail.com', 'password');
+VALUES ('admin', 'admin@gmail.com', '$2a$10$6qtKrwQ02AT.ETigTQBDtu6h2UNTunAGhyaw52y.zpfIyT.ThwADW');-- pass:admin
 
 INSERT INTO tbl_user_roles (role, user_id) VALUES
   ('ROLE_USER', 1),

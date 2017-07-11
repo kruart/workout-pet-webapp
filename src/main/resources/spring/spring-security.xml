@@ -25,10 +25,16 @@
 
     <authentication-manager>
         <authentication-provider user-service-ref="userService">
+            <password-encoder ref="bcryptEncoder"/>
             <!--<user-service>-->
                 <!--<user name="user" password="user" authorities="ROLE_USER"/>-->
                 <!--<user name="admin" password="admin" authorities="ROLE_USER,ROLE_ADMIN"/>-->
             <!--</user-service>-->
         </authentication-provider>
     </authentication-manager>
+
+    <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    <beans:bean id="passwordUtil" class="ua.kruart.workout.util.PasswordUtil"
+    p:BCryptPasswordEncoder-ref="bcryptEncoder"/>
 </beans:beans>

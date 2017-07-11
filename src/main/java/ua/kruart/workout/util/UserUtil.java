@@ -15,7 +15,7 @@ public class UserUtil {
     public static User updateUser(User oldUser, User newUser) {
         oldUser.setName(newUser.getName());
         oldUser.setEmail(newUser.getEmail());
-        oldUser.setPassword(newUser.getPassword());
+        oldUser.setPassword(PasswordUtil.encode(newUser.getPassword()));
         return oldUser;
     }
 }

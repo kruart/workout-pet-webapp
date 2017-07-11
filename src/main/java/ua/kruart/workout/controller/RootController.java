@@ -14,6 +14,7 @@ import ua.kruart.workout.model.Role;
 import ua.kruart.workout.model.User;
 import ua.kruart.workout.security.AuthorizedUser;
 import ua.kruart.workout.service.UserService;
+import ua.kruart.workout.util.PasswordUtil;
 
 import javax.validation.Valid;
 import java.util.Collections;
@@ -91,6 +92,7 @@ public class RootController {
     private User prepareForSave(User user) {
         user.setId(null);
         user.setRoles(new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
+        user.setPassword(PasswordUtil.encode(user.getPassword()));
         return user;
     }
 }

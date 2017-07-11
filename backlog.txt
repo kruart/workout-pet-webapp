@@ -11,7 +11,7 @@
 +++ Add spring security(in-memory)
 --- ??hibernate cache
 +++ add User entity
---- add bcrypt password + sault
++++ add bcrypt password + sault
 +++ add UserDetailsService impl
 +++ register newUser
 +++ update userProfile
