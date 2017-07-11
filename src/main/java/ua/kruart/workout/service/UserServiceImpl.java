@@ -11,6 +11,7 @@ import ua.kruart.workout.model.User;
 import ua.kruart.workout.repository.UserRepository;
 import ua.kruart.workout.security.AuthorizedUser;
 import ua.kruart.workout.util.Checks;
+import ua.kruart.workout.util.UserUtil;
 import ua.kruart.workout.util.exception.InvalidParameterException;
 
 import java.util.List;
@@ -56,7 +57,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public void update(User user) {
-        repository.save(user);
+        User oldUser = get(user.getId());
+        repository.save(UserUtil.updateUser(oldUser, user));
     }
 
     @Override

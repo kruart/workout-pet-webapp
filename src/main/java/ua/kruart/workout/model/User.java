@@ -66,7 +66,7 @@ public class User extends NamedEntity {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     public String getPassword() {

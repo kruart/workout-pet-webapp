@@ -15,7 +15,7 @@
                     <c:if test="${type eq 'profile'}"><spring:message code="message.profile"/></c:if>
                 </h3>
                 <br>
-                <form:form method="post" modelAttribute="userModel" action="/register">
+                <form:form method="post" modelAttribute="userModel" action="${type eq 'register' ? '/register' : '/profile'}">
 
                     <div class="form-group">
                         <spring:message code="message.enterUsername" var="enterUsername"/>
@@ -39,8 +39,8 @@
                             <input type="checkbox"> <spring:message code="message.rememberMe"/>
                         </label>
                     </div>
-
-                    <button type="submit" class="btn btn-primary form-control">Register</button>
+                    <spring:message code="message.saveBtn" var="btnSave"/>
+                    <button type="submit" class="btn btn-primary form-control">${type eq 'register' ? 'Register' : btnSave}</button>
                 </form:form>
             </div>
         </div>

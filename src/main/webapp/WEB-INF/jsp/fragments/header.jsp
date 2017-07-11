@@ -34,7 +34,7 @@
         <ul class="nav navbar-nav">
             <jsp:include page="lang.jsp"/>
             <li class="nav-item">
-                <a class="nav-link" href="#">Username</a>
+                <a class="nav-link" href="<c:url value="/profile"/>">Username</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/register"/>">Register</a>
