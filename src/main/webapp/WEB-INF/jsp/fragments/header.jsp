@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,18 +31,27 @@
                     <a class="dropdown-item" href="#"><spring:message code="message.addOwnExerciseMenuItem"/></a>
                 </div>
             </li>
-        </ul>
-        <ul class="nav navbar-nav">
             <jsp:include page="lang.jsp"/>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/profile"/>">Username</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/register"/>">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
-            </li>
+        </ul>
+
+        <ul class="nav navbar-nav">
+            <sec:authorize access="isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/profile"/>"><sec:authentication property="principal.user.name"/></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/login"/>">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/register"/>">Register</a>
+                </li>
+            </sec:authorize>
+
         </ul>
     </div>
 </nav>

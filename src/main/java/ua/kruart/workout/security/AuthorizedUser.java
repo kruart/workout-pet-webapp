@@ -55,4 +55,8 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
     public void updateAuthorizedUser(User user) {
         this.user = user;
     }
+
+    public User getUser() {
+        return user;
+    }
 }

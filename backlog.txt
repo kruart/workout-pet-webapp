@@ -15,7 +15,7 @@
 +++ add UserDetailsService impl
 +++ register newUser
 +++ update userProfile
---- add to show logged username in every request
++++ add to show logged username in every request
 --- add csrf
 --- add rememberMe
 --- Add spring oauth(github)
