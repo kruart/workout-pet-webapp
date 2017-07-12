@@ -44,9 +44,9 @@
                 </form:form>
                 <c:if test="${type eq 'register'}">
                     <div class="socials">
-                        <div class="btn btn-block btn-social btn-github">
-                            <i class="fa fa-github"></i> Sign in with Github
-                        </div>
+                        <a class="btn btn-block btn-social btn-github" href="<c:url value="/oauth/github//authorize"/>" role="button">
+                            <span class="fa fa-github"></span> Sign in with Github
+                        </a>
                     </div>
                 </c:if>
 

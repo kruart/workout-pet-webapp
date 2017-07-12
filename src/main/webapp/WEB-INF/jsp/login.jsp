@@ -32,15 +32,17 @@
 						</label>
 					</div>
 					<div>
-                        <c:if test="${param.error != null}">
-                            <b class="errorMessage"><spring:message code="message.invalidCredentials"/></b>
-                        </c:if>
+						<c:if test="${param.error != null}">
+							<b class="errorMessage"><spring:message code="message.invalidCredentials"/></b>
+						</c:if>
 					</div>
 
 					<button type="submit" class="btn btn-primary form-control">Login</button>
 				</form>
-				<div class="btn btn-block btn-social btn-github">
-					<i class="fa fa-github"></i> Sign in with Github
+				<div class="socials">
+					<a class="btn btn-block btn-social btn-github" href="<c:url value="/oauth/github//authorize"/>" role="button">
+						<span class="fa fa-github"></span> Sign in with Github
+					</a>
 				</div>
 			</div>
 		</div>
