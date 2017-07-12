@@ -45,7 +45,7 @@
                 <c:if test="${type eq 'register'}">
                     <div class="socials">
                         <a class="btn btn-block btn-social btn-github" href="<c:url value="/oauth/github//authorize"/>" role="button">
-                            <span class="fa fa-github"></span> Sign in with Github
+                            <span class="fa fa-github"></span> <spring:message code="message.singUpGithub"/>
                         </a>
                     </div>
                 </c:if>
