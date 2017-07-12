@@ -42,6 +42,14 @@
                     <spring:message code="message.saveBtn" var="btnSave"/>
                     <button type="submit" class="btn btn-primary form-control">${type eq 'register' ? 'Register' : btnSave}</button>
                 </form:form>
+                <c:if test="${type eq 'register'}">
+                    <div class="socials">
+                        <div class="btn btn-block btn-social btn-github">
+                            <i class="fa fa-github"></i> Sign in with Github
+                        </div>
+                    </div>
+                </c:if>
+
             </div>
         </div>
     </div>

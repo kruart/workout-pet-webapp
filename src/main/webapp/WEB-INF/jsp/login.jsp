@@ -39,6 +39,9 @@
 
 					<button type="submit" class="btn btn-primary form-control">Login</button>
 				</form>
+				<div class="btn btn-block btn-social btn-github">
+					<i class="fa fa-github"></i> Sign in with Github
+				</div>
 			</div>
 		</div>
 	</div>
