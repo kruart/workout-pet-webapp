@@ -25,13 +25,13 @@ import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 import static ua.kruart.workout.util.UserUtil.prepareForSaveOauth;
 
 /**
- * Handles requests for github oauth2 authorization
+ * Handles requests for facebook oauth2 authorization
  *
- * @author kruart on 12.07.2017.
+ * @author kruart on 13.07.2017.
  */
 @Controller
-@RequestMapping("/oauth/github/")
-public class Oauth2GithubController {
+@RequestMapping("/oauth/facebook/")
+public class FacebookOauth2Controller {
 
     @Autowired
     private RestTemplate template;
@@ -43,12 +43,13 @@ public class Oauth2GithubController {
     private UserService service;
 
     @Autowired
-    @Qualifier(value = "oauth2GithubData")
+    @Qualifier(value = "oauth2FacebookData")
     private Oauth2Data oauth2Data;
 
     /**
-     * Performs redirect to github authorize url
-     * more about: https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/
+     * Performs redirect to facebook authorize url
+     * more about: https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow
+     * check: https://developers.facebook.com/tools/explorer
      */
     @RequestMapping("/authorize")
     public String authorize() {
@@ -56,12 +57,13 @@ public class Oauth2GithubController {
                 "?client_id=" + oauth2Data.getClientId() +
                 "&redirect_uri=" + oauth2Data.getRedirectUrl() +
                 "&scope=" + oauth2Data.getScope() +
-                "&state=" + oauth2Data.getState();
+                "&state=" + oauth2Data.getState() +
+                "&response_type=code";
     }
 
     /**
-     * This is the callback url(redirect-url) for the github(which we specify in 'authorize' function in params) through which
-     * the github passes us the authorization code and then we requests access token from github for futher authorization our 'Client Application'
+     * This is the callback url(redirect-url) for the facebook(which we specify in 'authorize' function in params) through which
+     * the facebook passes us the authorization code and then we requests access token from facebook for futher authorization our 'Client Application'
      */
     @RequestMapping("/callback")
     public String authenticate(@RequestParam String code, @RequestParam String state, HttpServletRequest request) {
@@ -74,7 +76,7 @@ public class Oauth2GithubController {
     }
 
     /**
-     * Gets Access Token from github
+     * Gets Access Token from facebook
      */
     private String getAccessToken(String code) {
         UriComponentsBuilder builder = fromHttpUrl(oauth2Data.getAccesTokenUrl())
@@ -88,23 +90,24 @@ public class Oauth2GithubController {
     }
 
     /**
-     * Using an access token to receive username from github
+     * Using an access token to receive username from facebook
      */
     private String getUser(String token) {
         UriComponentsBuilder builder = fromHttpUrl(oauth2Data.getUserUrl());
         ResponseEntity<JsonNode> tokenEntity = template.exchange(
                 builder.build().encode().toUri(), HttpMethod.GET, new HttpEntity<>(createHeaderWithAccessToken(token)), JsonNode.class);
-        return tokenEntity.getBody().get("login").asText();
+        return tokenEntity.getBody().get("name").asText();
     }
 
     /**
-     * Using an access token to receive email from github
+     * Using an access token to receive email from facebook
+     * NOTE: If user used the phone number when registering, then the mail graph will be null ...
      */
     private String getEmail(String token) {
         UriComponentsBuilder builder = fromHttpUrl(oauth2Data.getEmailUrl());
         ResponseEntity<JsonNode> tokenEntity = template.exchange(
                 builder.build().encode().toUri(), HttpMethod.GET, new HttpEntity<>(createHeaderWithAccessToken(token)), JsonNode.class);
-        return tokenEntity.getBody().get(0).get("email").asText();
+        return tokenEntity.getBody().get("email").asText();
     }
 
     /**

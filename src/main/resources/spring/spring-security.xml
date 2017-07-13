@@ -8,7 +8,7 @@
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
     <beans:bean id="customFailureHandler" class="ua.kruart.workout.controller.handler.UsernameRememberingAuthenticationFailureHandler"
-    p:redirectTarget="/login"/>
+                p:redirectTarget="/login"/>
 
     <http pattern="/resources/**" security="none"/>
 
@@ -27,8 +27,8 @@
         <authentication-provider user-service-ref="userService">
             <password-encoder ref="bcryptEncoder"/>
             <!--<user-service>-->
-                <!--<user name="user" password="user" authorities="ROLE_USER"/>-->
-                <!--<user name="admin" password="admin" authorities="ROLE_USER,ROLE_ADMIN"/>-->
+            <!--<user name="user" password="user" authorities="ROLE_USER"/>-->
+            <!--<user name="admin" password="admin" authorities="ROLE_USER,ROLE_ADMIN"/>-->
             <!--</user-service>-->
         </authentication-provider>
     </authentication-manager>
@@ -36,5 +36,28 @@
     <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
     <beans:bean id="passwordUtil" class="ua.kruart.workout.util.PasswordUtil"
-    p:BCryptPasswordEncoder-ref="bcryptEncoder"/>
+                p:BCryptPasswordEncoder-ref="bcryptEncoder"/>
+
+    <beans:bean id="oauth2GithubData" class="ua.kruart.workout.controller.oauth.Oauth2Data"
+                p:authorizeUrl="http://github.com/login/oauth/authorize"
+                p:accesTokenUrl="https://github.com/login/oauth/access_token"
+                p:userUrl="https://api.github.com/user"
+                p:emailUrl="https://api.github.com/user/emails"
+                p:clientId="5ef6bbf3012559df545b"
+                p:clientSecret="35321128b121f92bf2cee2166d962358402d2fb7"
+                p:redirectUrl="http://localhost:8080/oauth/github/callback"
+                p:scope="user:email"
+                p:state="workout_csrf_token_Dk38L9_Git"/>
+
+
+    <beans:bean id="oauth2FacebookData" class="ua.kruart.workout.controller.oauth.Oauth2Data"
+                p:authorizeUrl="https://www.facebook.com/dialog/oauth"
+                p:accesTokenUrl="https://graph.facebook.com/oauth/access_token"
+                p:userUrl="https://graph.facebook.com/v2.9/me?fields=name"
+                p:emailUrl="https://graph.facebook.com/v2.9/me?fields=email"
+                p:clientId="1747338582230976"
+                p:clientSecret="e392b1f9db8896028fa370da02585a5d"
+                p:redirectUrl="http://localhost:8080/oauth/facebook/callback"
+                p:scope="public_profile,email"
+                p:state="workout_csrf_token_Dk38L9_Face"/>
 </beans:beans>
