@@ -13,6 +13,12 @@
 
     <context:component-scan base-package="ua.kruart.workout.controller"/>
 
+    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" id="converter"/>
+
+    <bean class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters" ref="converter"/>
+    </bean>
+
     <!--  all resources inside folder src/main/webapp/resources are mapped so they can be referred to inside JSP files -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
 

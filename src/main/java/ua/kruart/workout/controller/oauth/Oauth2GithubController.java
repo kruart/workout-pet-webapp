@@ -1,11 +1,17 @@
 package ua.kruart.workout.controller.oauth;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 import static ua.kruart.workout.controller.oauth.GithubOauth2StaticData.*;
 
 /**
@@ -16,6 +22,9 @@ import static ua.kruart.workout.controller.oauth.GithubOauth2StaticData.*;
 @Controller
 @RequestMapping("/oauth/github/")
 public class Oauth2GithubController {
+
+    @Autowired
+    private RestTemplate template;
 
     /**
      * Performs redirect to github authorize url
@@ -32,12 +41,28 @@ public class Oauth2GithubController {
 
     /**
      * This is the callback url(redirect-url) for the github(which we specify in 'authorize' function in params) through which
-     * the github passes us the authorization code and then we requests access token from github for futher authorize our 'Client Application'
+     * the github passes us the authorization code and then we requests access token from github for futher authorization our 'Client Application'
      */
     @RequestMapping("/callback")
     public String authorize(@RequestParam String code, @RequestParam String state, HttpServletRequest request) {
 
-        System.out.println(request.getRequestURL() + "?" + request.getQueryString());
+        if(state.equals("workout_csrf_token_Dk38L9")) {
+            String accessToken = getAccessToken(code);
+        }
         return null;
+    }
+
+    /**
+     * Gets Access Token from github
+     */
+    private String getAccessToken(String code) {
+        UriComponentsBuilder builder = fromHttpUrl(ACCESS_TOKEN_URL)
+                .queryParam("client_id", CLIENT_ID)
+                .queryParam("client_secret", CLIENT_SECRET)
+                .queryParam("code", code)
+                .queryParam("redirect_uri", REDIRECT_URL)
+                .queryParam("state", STATE);
+        ResponseEntity<JsonNode> tokenEntity = template.postForEntity(builder.build().encode().toUri(), null, JsonNode.class);
+        return tokenEntity.getBody().get("access_token").asText();
     }
 }
