@@ -48,6 +48,7 @@ public class Oauth2GithubController {
 
         if(state.equals("workout_csrf_token_Dk38L9")) {
             String accessToken = getAccessToken(code);
+            System.out.println(getUser(accessToken) + " : " + getEmail(accessToken));
         }
         return null;
     }
@@ -64,5 +65,23 @@ public class Oauth2GithubController {
                 .queryParam("state", STATE);
         ResponseEntity<JsonNode> tokenEntity = template.postForEntity(builder.build().encode().toUri(), null, JsonNode.class);
         return tokenEntity.getBody().get("access_token").asText();
+    }
+
+    /**
+     * Using an access token to receive username from github
+     */
+    private String getUser(String token) {
+        UriComponentsBuilder builder = fromHttpUrl(USER_URL).queryParam("access_token", token);
+        ResponseEntity<JsonNode> tokenEntity = template.getForEntity(builder.build().encode().toUri(), JsonNode.class);
+        return tokenEntity.getBody().get("login").asText();
+    }
+
+    /**
+     * Using an access token to receive email from github
+     */
+    private String getEmail(String token) {
+        UriComponentsBuilder builder = fromHttpUrl(EMAIL_URL).queryParam("access_token", token);
+        ResponseEntity<JsonNode> tokenEntity = template.getForEntity(builder.build().encode().toUri(), JsonNode.class);
+        return tokenEntity.getBody().get(0).get("email").asText();
     }
 }
