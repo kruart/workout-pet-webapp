@@ -6,16 +6,23 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import ua.kruart.workout.service.UserService;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 import static ua.kruart.workout.controller.oauth.GithubOauth2StaticData.*;
+import static ua.kruart.workout.util.UserUtil.prepareForSaveOauth;
 
 /**
  * Handles requests for github oauth2 authorization
@@ -28,6 +35,12 @@ public class Oauth2GithubController {
 
     @Autowired
     private RestTemplate template;
+
+    @Autowired
+    private UserDetailsService serviceDetails;
+
+    @Autowired
+    private UserService service;
 
     /**
      * Performs redirect to github authorize url
@@ -47,11 +60,11 @@ public class Oauth2GithubController {
      * the github passes us the authorization code and then we requests access token from github for futher authorization our 'Client Application'
      */
     @RequestMapping("/callback")
-    public String authorize(@RequestParam String code, @RequestParam String state, HttpServletRequest request) {
+    public String authenticate(@RequestParam String code, @RequestParam String state, HttpServletRequest request) {
 
         if(state.equals("workout_csrf_token_Dk38L9")) {
             String accessToken = getAccessToken(code);
-            System.out.println(getUser(accessToken) + " : " + getEmail(accessToken));
+            return authorizeOrRegister(getUser(accessToken), getEmail(accessToken));
         }
         return null;
     }
@@ -97,5 +110,23 @@ public class Oauth2GithubController {
         HttpHeaders header = new HttpHeaders();
         header.add("Authorization", "Bearer " + token);
         return header;
+    }
+
+    /**
+     * Authorizes a user or registers a new user, and then authorizes
+     */
+    private String authorizeOrRegister(String userName, String email) {
+        UserDetails userDetails = null;
+        try {
+            userDetails = serviceDetails.loadUserByUsername(email);
+        }
+        catch(NoResultException e) {
+            service.save(prepareForSaveOauth(userName, email));
+            userDetails = serviceDetails.loadUserByUsername(email);
+        }
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities()));
+        return "redirect:/";
+
     }
 }

@@ -10,15 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import ua.kruart.workout.model.Role;
 import ua.kruart.workout.model.User;
 import ua.kruart.workout.security.AuthorizedUser;
 import ua.kruart.workout.service.UserService;
-import ua.kruart.workout.util.PasswordUtil;
 
 import javax.validation.Valid;
-import java.util.Collections;
-import java.util.HashSet;
+
+import static ua.kruart.workout.util.UserUtil.prepareForSave;
 
 /**
  * Handles all requests begging with root path '/'
@@ -87,12 +85,5 @@ public class RootController {
         //if error exist
         model.put("type", "register");
         return "profileOrRegister";
-    }
-
-    private User prepareForSave(User user) {
-        user.setId(null);
-        user.setRoles(new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
-        user.setPassword(PasswordUtil.encode(user.getPassword()));
-        return user;
     }
 }
