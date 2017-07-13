@@ -43,6 +43,9 @@
 					<a class="btn btn-block btn-social btn-github" href="<c:url value="/oauth/github//authorize"/>" role="button">
 						<span class="fa fa-github"></span> <spring:message code="message.singInGithub"/>
 					</a>
+					<a class="btn btn-block btn-social btn-facebook" href="<c:url value="/oauth/facebook//authorize"/>" role="button">
+						<span class="fa fa-facebook"></span> <spring:message code="message.singInFacebook"/>
+					</a>
 				</div>
 			</div>
 		</div>
