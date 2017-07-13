@@ -2,6 +2,9 @@ package ua.kruart.workout.controller.oauth;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,8 +74,9 @@ public class Oauth2GithubController {
      * Using an access token to receive username from github
      */
     private String getUser(String token) {
-        UriComponentsBuilder builder = fromHttpUrl(USER_URL).queryParam("access_token", token);
-        ResponseEntity<JsonNode> tokenEntity = template.getForEntity(builder.build().encode().toUri(), JsonNode.class);
+        UriComponentsBuilder builder = fromHttpUrl(USER_URL);
+        ResponseEntity<JsonNode> tokenEntity = template.exchange(
+                builder.build().encode().toUri(), HttpMethod.GET, new HttpEntity<>(createHeaderWithAccessToken(token)), JsonNode.class);
         return tokenEntity.getBody().get("login").asText();
     }
 
@@ -80,8 +84,18 @@ public class Oauth2GithubController {
      * Using an access token to receive email from github
      */
     private String getEmail(String token) {
-        UriComponentsBuilder builder = fromHttpUrl(EMAIL_URL).queryParam("access_token", token);
-        ResponseEntity<JsonNode> tokenEntity = template.getForEntity(builder.build().encode().toUri(), JsonNode.class);
+        UriComponentsBuilder builder = fromHttpUrl(EMAIL_URL);
+        ResponseEntity<JsonNode> tokenEntity = template.exchange(
+                builder.build().encode().toUri(), HttpMethod.GET, new HttpEntity<>(createHeaderWithAccessToken(token)), JsonNode.class);
         return tokenEntity.getBody().get(0).get("email").asText();
+    }
+
+    /**
+     * Creates and returns http header with Access Token inside
+     */
+    private HttpHeaders createHeaderWithAccessToken(String token) {
+        HttpHeaders header = new HttpHeaders();
+        header.add("Authorization", "Bearer " + token);
+        return header;
     }
 }
