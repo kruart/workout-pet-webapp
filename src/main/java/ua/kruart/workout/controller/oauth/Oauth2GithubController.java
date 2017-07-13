@@ -4,25 +4,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import ua.kruart.workout.service.UserService;
 
-import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
-import static ua.kruart.workout.util.UserUtil.prepareForSaveOauth;
 
 /**
  * Handles requests for github oauth2 authorization
@@ -30,17 +21,8 @@ import static ua.kruart.workout.util.UserUtil.prepareForSaveOauth;
  * @author kruart on 12.07.2017.
  */
 @Controller
-@RequestMapping("/oauth/github/")
-public class Oauth2GithubController {
-
-    @Autowired
-    private RestTemplate template;
-
-    @Autowired
-    private UserDetailsService serviceDetails;
-
-    @Autowired
-    private UserService service;
+@RequestMapping("/oauth/github")
+public class Oauth2GithubController extends AbstractOauth2Controller {
 
     @Autowired
     @Qualifier(value = "oauth2GithubData")
@@ -74,17 +56,10 @@ public class Oauth2GithubController {
     }
 
     /**
-     * Gets Access Token from github
+     * Calls the parent method to obtain the access token
      */
     private String getAccessToken(String code) {
-        UriComponentsBuilder builder = fromHttpUrl(oauth2Data.getAccesTokenUrl())
-                .queryParam("client_id", oauth2Data.getClientId())
-                .queryParam("client_secret", oauth2Data.getClientSecret())
-                .queryParam("code", code)
-                .queryParam("redirect_uri", oauth2Data.getRedirectUrl())
-                .queryParam("state", oauth2Data.getState());
-        ResponseEntity<JsonNode> tokenEntity = template.postForEntity(builder.build().encode().toUri(), null, JsonNode.class);
-        return tokenEntity.getBody().get("access_token").asText();
+        return getAccessToken(code, oauth2Data);
     }
 
     /**
@@ -105,32 +80,5 @@ public class Oauth2GithubController {
         ResponseEntity<JsonNode> tokenEntity = template.exchange(
                 builder.build().encode().toUri(), HttpMethod.GET, new HttpEntity<>(createHeaderWithAccessToken(token)), JsonNode.class);
         return tokenEntity.getBody().get(0).get("email").asText();
-    }
-
-    /**
-     * Creates and returns http header with Access Token inside
-     */
-    private HttpHeaders createHeaderWithAccessToken(String token) {
-        HttpHeaders header = new HttpHeaders();
-        header.add("Authorization", "Bearer " + token);
-        return header;
-    }
-
-    /**
-     * Authorizes a user or registers a new user, and then authorizes
-     */
-    private String authorizeOrRegister(String userName, String email) {
-        UserDetails userDetails = null;
-        try {
-            userDetails = serviceDetails.loadUserByUsername(email);
-        }
-        catch(NoResultException e) {
-            service.save(prepareForSaveOauth(userName, email));
-            userDetails = serviceDetails.loadUserByUsername(email);
-        }
-        SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities()));
-        return "redirect:/";
-
     }
 }

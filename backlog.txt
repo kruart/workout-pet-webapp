@@ -18,7 +18,7 @@
 +++ add to show logged username in every request
 +++ add csrf
 --- add rememberMe
---- Add spring oauth(github)
++++ Add spring oauth(github, facebook)
 --- Rewrite xml-conf on java conf
 --- Migrate to Spring Boot
 --- Migrate to MongoDB
