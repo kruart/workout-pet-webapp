@@ -21,31 +21,31 @@ public class ApproachServiceImpl implements ApproachService {
     private ApproachRepository repository;
 
     @Override
-    public Approach save(Approach approach, int exerciseId) {
-        Checks.checkParameter(repository.save(approach, exerciseId), exerciseId);
+    public Approach save(Approach approach, int exerciseId, int userId) {
+        Checks.checkParameter(repository.save(approach, exerciseId, userId), exerciseId);
         return approach;
     }
 
     @Override
-    public void update(Approach approach, int exerciseId) throws InvalidParameterException {
-        Checks.checkParameter(repository.save(approach, exerciseId), approach.getId());
+    public void update(Approach approach, int exerciseId, int userId) throws InvalidParameterException {
+        Checks.checkParameter(repository.save(approach, exerciseId, userId), approach.getId());
     }
 
     @Override
-    public void delete(int id, int exerciseId) throws InvalidParameterException {
-        Checks.checkParameter(repository.delete(id, exerciseId), id);
+    public void delete(int id, int exerciseId, int userId) throws InvalidParameterException {
+        Checks.checkParameter(repository.delete(id, exerciseId, userId), id);
     }
 
     @Override
-    public Approach get(int id, int exerciseId) throws InvalidParameterException {
-        Approach approach = repository.findById(id, exerciseId);
+    public Approach get(int id, int exerciseId, int userId) throws InvalidParameterException {
+        Approach approach = repository.findById(id, exerciseId, userId);
         Checks.checkParameter(approach, id);
         return approach;
     }
 
     @Override
-    public List<Approach> getAll(int exerciseId) {
-        List<Approach> approachList = repository.findAll(exerciseId);
+    public List<Approach> getAll(int exerciseId, int userId) {
+        List<Approach> approachList = repository.findAll(exerciseId, userId);
         Checks.checkParameter(approachList != null, exerciseId);
         return approachList;
     }

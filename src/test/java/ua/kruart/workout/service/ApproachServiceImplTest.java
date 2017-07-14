@@ -14,6 +14,7 @@ import ua.kruart.workout.util.exception.InvalidParameterException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static ua.kruart.workout.UserTestData.USER;
 
 /**
  * Verifies functionality of {@link ua.kruart.workout.service.ApproachServiceImpl} class
@@ -35,8 +36,8 @@ public class ApproachServiceImplTest {
 
     @Test
     public void testSaveApproach() throws Exception {
-        Approach testData = service.save(getTestData(), EXERCISE_CORRECT_ID);
-        Approach savedApproach = service.get(testData.getId(), EXERCISE_CORRECT_ID);
+        Approach testData = service.save(getTestData(), EXERCISE_CORRECT_ID, USER.getId());
+        Approach savedApproach = service.get(testData.getId(), EXERCISE_CORRECT_ID, USER.getId());
 
         assertEquals(testData, savedApproach);
         assertEquals(testData.getWeight(), savedApproach.getWeight(), 0.01);
@@ -44,46 +45,46 @@ public class ApproachServiceImplTest {
 
     @Test
     public void testUpdateApproachSuccess() throws Exception {
-        Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID);
+        Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID, USER.getId());
         approachById.setRepeats(111);
-        service.update(approachById, EXERCISE_CORRECT_ID);
-        assertEquals(approachById.getRepeats(), service.get(approachById.getId(), EXERCISE_CORRECT_ID).getRepeats());
+        service.update(approachById, EXERCISE_CORRECT_ID, USER.getId());
+        assertEquals(approachById.getRepeats(), service.get(approachById.getId(), EXERCISE_CORRECT_ID, USER.getId()).getRepeats());
     }
 
     @Test(expected = InvalidParameterException.class)
     public void testUpdateApproachFailure() throws Exception {
-        Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID);
+        Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID, USER.getId());
         approachById.setRepeats(111);
-        service.update(approachById, EXERCISE_INCORRECT_ID);
+        service.update(approachById, EXERCISE_INCORRECT_ID, USER.getId());
     }
 
     @Test
     public void testDeleteApproachSuccess() throws Exception {
-        assertEquals("Size of approach list: 4", 4, service.getAll(EXERCISE_CORRECT_ID).size());
-        service.delete(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID);
-        assertEquals("Size of approach list after delete: 3", 3, service.getAll(EXERCISE_CORRECT_ID).size());
+        assertEquals("Size of approach list: 4", 4, service.getAll(EXERCISE_CORRECT_ID, USER.getId()).size());
+        service.delete(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID, USER.getId());
+        assertEquals("Size of approach list after delete: 3", 3, service.getAll(EXERCISE_CORRECT_ID, USER.getId()).size());
     }
 
     @Test(expected = InvalidParameterException.class)
     public void testDeleteApproachFailure() throws Exception {
-        service.delete(APPROACH_CORRECT_ID, EXERCISE_INCORRECT_ID); //non-existing ID
+        service.delete(APPROACH_CORRECT_ID, EXERCISE_INCORRECT_ID, USER.getId()); //non-existing ID
     }
 
     @Test
     public void testGetApproachByIdsSuccess() throws Exception {
-        Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID);
+        Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_CORRECT_ID, USER.getId());
         assertEquals(15.2, approachById.getWeight(), 0.01);
         assertEquals(Integer.valueOf(8), approachById.getRepeats());
     }
 
     @Test(expected = InvalidParameterException.class)
     public void testGetApproachByIdsFailure() throws Exception {
-        Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_INCORRECT_ID);
+        Approach approachById = service.get(APPROACH_CORRECT_ID, EXERCISE_INCORRECT_ID, USER.getId());
     }
 
     @Test
     public void testGetAllApproaches() throws Exception {
-        List<Approach> approaches = service.getAll(EXERCISE_CORRECT_ID);
+        List<Approach> approaches = service.getAll(EXERCISE_CORRECT_ID, USER.getId());
         assertEquals(4, approaches.size());
     }
 

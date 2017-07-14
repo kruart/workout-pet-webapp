@@ -12,6 +12,8 @@ import ua.kruart.workout.service.ApproachService;
 import javax.validation.Valid;
 import java.util.List;
 
+import static ua.kruart.workout.security.AuthorizedUser.getAuthUserId;
+
 /**
  * Handles approach-related requests
  *
@@ -26,7 +28,7 @@ public class ApproachController {
 
     @GetMapping("/all/exercise/{eid}")
     public ModelAndView getAllApproaches(@PathVariable("eid") Integer exerciseId) {
-        List<Approach> approaches = service.getAll(exerciseId);
+        List<Approach> approaches = service.getAll(exerciseId, getAuthUserId());
         return new ModelAndView("approachList", "approachList", approaches).addObject("eid", exerciseId);
     }
 
@@ -37,7 +39,7 @@ public class ApproachController {
 
     @GetMapping("/update/{id}/exercise/{eid}")
     public ModelAndView updateApproach(@PathVariable Integer id, @PathVariable("eid") Integer exerciseId) {
-        return new ModelAndView("editApproach", "approachModel", service.get(id, exerciseId)).addObject("eid", exerciseId);
+        return new ModelAndView("editApproach", "approachModel", service.get(id, exerciseId, getAuthUserId())).addObject("eid", exerciseId);
     }
 
     @PostMapping("/saveChanges/exercise/{eid}")
@@ -49,9 +51,9 @@ public class ApproachController {
         }
 
         if(approach.isNew()) {
-            service.save(approach, exerciseId);
+            service.save(approach, exerciseId, getAuthUserId());
         } else {
-            service.update(approach, exerciseId);
+            service.update(approach, exerciseId, getAuthUserId());
         }
 
         return "redirect:/approach/all/exercise/" + exerciseId;
@@ -59,7 +61,7 @@ public class ApproachController {
 
     @GetMapping("/delete/{id}/exercise/{eid}")
     public String removeApproach(@PathVariable Integer id, @PathVariable("eid") Integer exerciseId) {
-        service.delete(id, exerciseId);
+        service.delete(id, exerciseId, getAuthUserId());
         return "redirect:/approach/all/exercise/" + exerciseId;
     }
 }

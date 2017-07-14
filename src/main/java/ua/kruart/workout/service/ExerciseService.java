@@ -14,13 +14,13 @@ import java.util.List;
  * @author kruart on 27.05.2017
  */
 public interface ExerciseService {
-    Exercise save(Exercise workout, int workoutId);
+    Exercise save(Exercise workout, int workoutId, int userId);
 
-    void update(Exercise workout, int workoutId) throws InvalidParameterException;
+    void update(Exercise workout, int workoutId, int userId) throws InvalidParameterException;
 
-    void delete(int id, int workoutId) throws InvalidParameterException;
+    void delete(int id, int workoutId, int userId) throws InvalidParameterException;
 
-    Exercise get(int id, int workoutId) throws InvalidParameterException;
+    Exercise get(int id, int workoutId, int userId) throws InvalidParameterException;
 
-    List<Exercise> getAll(int workoutId);
+    List<Exercise> getAll(int workoutId, int userId);
 }

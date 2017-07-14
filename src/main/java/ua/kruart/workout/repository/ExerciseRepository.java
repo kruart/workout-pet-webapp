@@ -17,7 +17,7 @@ public interface ExerciseRepository {
      * @param workoutId unique identifier of {@link ua.kruart.workout.model.Workout} instance which {@link Exercise} belongs to
      * @return null if updated object is not found or {@code id} is not associated with {@code workoutId}
      */
-    Exercise save(Exercise exercise, int workoutId);
+    Exercise save(Exercise exercise, int workoutId, int userId);
 
     /**
      * Returns {@link Exercise} with specified identifier.
@@ -26,7 +26,7 @@ public interface ExerciseRepository {
      * @return if no {@link Exercise} exists with such identifier
      * or if {@code id} is not associated with {@code exerciseId} then null is returned
      */
-    Exercise findById(int id, int workoutId);
+    Exercise findById(int id, int workoutId, int userId);
 
     /**
      * Delete exercise with specified identifier
@@ -34,14 +34,14 @@ public interface ExerciseRepository {
      * @param workoutId unique identifier of {@link ua.kruart.workout.model.Workout} instance which {@link Exercise} belongs to
      * @return false if not found
      */
-    boolean delete(int id, int workoutId);
+    boolean delete(int id, int workoutId, int userId);
 
     /**
      * Returns all the {@link Exercise} objects which belong to {@code workoutId}
      * @param workoutId unique identifier of {@link ua.kruart.workout.model.Workout} instance which {@link Exercise} belongs to
      * @return
      */
-    List<Exercise> findAll(int workoutId);
+    List<Exercise> findAll(int workoutId, int userId);
 
 
 }

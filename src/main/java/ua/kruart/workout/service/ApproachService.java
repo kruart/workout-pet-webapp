@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface ApproachService {
 
-    Approach save(Approach approach, int exerciseId);
+    Approach save(Approach approach, int exerciseId, int userId);
 
-    void update(Approach approach, int exerciseId) throws InvalidParameterException;
+    void update(Approach approach, int exerciseId, int userId) throws InvalidParameterException;
 
-    void delete(int id, int exerciseId) throws InvalidParameterException;
+    void delete(int id, int exerciseId, int userId) throws InvalidParameterException;
 
-    Approach get(int id, int exerciseId) throws InvalidParameterException;
+    Approach get(int id, int exerciseId, int userId) throws InvalidParameterException;
 
-    List<Approach> getAll(int exerciseId);
+    List<Approach> getAll(int exerciseId, int userId);
 }

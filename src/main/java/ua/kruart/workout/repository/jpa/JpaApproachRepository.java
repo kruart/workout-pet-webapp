@@ -8,7 +8,6 @@ import ua.kruart.workout.model.Approach;
 import ua.kruart.workout.model.Exercise;
 import ua.kruart.workout.repository.ApproachRepository;
 import ua.kruart.workout.repository.WorkoutRepository;
-import ua.kruart.workout.security.AuthorizedUser;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,11 +30,11 @@ public class JpaApproachRepository implements ApproachRepository {
 
     @Transactional
     @Override
-    public Approach save(Approach approach, int exerciseId) {
+    public Approach save(Approach approach, int exerciseId, int userId) {
         Exercise exerciseRef = em.getReference(Exercise.class, exerciseId);
         approach.setExercise(exerciseRef);
 
-        if (!isExerciseBelongsToUser(exerciseId)) {
+        if (!isExerciseBelongsToUser(exerciseId, userId)) {
             return null;    //if not return null
         }
 
@@ -43,45 +42,46 @@ public class JpaApproachRepository implements ApproachRepository {
             em.persist(approach);
             return approach;
         } else {
-            return findById(approach.getId(), exerciseId) == null ? null : em.merge(approach);
+            return findById(approach.getId(), exerciseId, userId) == null ? null : em.merge(approach);
         }
     }
 
     @Override
-    public Approach findById(int id, int exerciseId) {
+    public Approach findById(int id, int exerciseId, int userId) {
         List<Approach> approachTypedQuery = em.createNamedQuery("Approach.findById", Approach.class)
                 .setParameter("id", id)
                 .setParameter("exerciseId", exerciseId)
-                .setParameter("userId", AuthorizedUser.getAuthUserId())
+                .setParameter("userId", userId)
                 .getResultList();
         return DataAccessUtils.singleResult(approachTypedQuery);
     }
 
     @Transactional
     @Override
-    public boolean delete(int id, int exerciseId) {
-        return em.createNamedQuery("Approach.delete")
-                .setParameter("id", id)
-                .setParameter("exerciseId", exerciseId)
-                .executeUpdate() != 0;
+    public boolean delete(int id, int exerciseId, int userId) {
+        return findById(id, exerciseId, userId) != null &&
+                em.createNamedQuery("Approach.delete")
+                        .setParameter("id", id)
+                        .setParameter("exerciseId", exerciseId)
+                        .executeUpdate() != 0;
     }
 
     @Override
-    public List<Approach> findAll(int exerciseId) {
-        if (!isExerciseBelongsToUser(exerciseId)) {
+    public List<Approach> findAll(int exerciseId, int userId) {
+        if (!isExerciseBelongsToUser(exerciseId, userId)) {
             return null;    //if not return null
         }
 
         return em.createNamedQuery("Approach.findAll", Approach.class)
                 .setParameter("exerciseId", exerciseId)
-                .setParameter("userId", AuthorizedUser.getAuthUserId())
+                .setParameter("userId", userId)
                 .getResultList();
     }
 
-    private boolean isExerciseBelongsToUser(int exerciseId) {
+    private boolean isExerciseBelongsToUser(int exerciseId, int userId) {
         return em.createQuery(
                 "select w from Workout w where w.user.id=:userId AND w.id=(select e.workout.id from Exercise e where e.id=:exerciseId)")
-                .setParameter("userId", AuthorizedUser.getAuthUserId())
+                .setParameter("userId", userId)
                 .setParameter("exerciseId", exerciseId)
                 .getResultList().size() != 0;
     }

@@ -17,7 +17,7 @@ public interface ApproachRepository {
      * @param exerciseId unique identifier of {@link ua.kruart.workout.model.Exercise} instance to which {@link Approach} belongs
      * @return null if updated object is not found or {@code id} is not associated with {@code exerciseId}
      */
-    Approach save(Approach approach, int exerciseId);
+    Approach save(Approach approach, int exerciseId, int userId);
 
     /**
      * Returns {@link Approach} with specified identifier.
@@ -25,7 +25,7 @@ public interface ApproachRepository {
      * @param exerciseId unique identifier of {@link ua.kruart.workout.model.Exercise} instance to which {@link Approach} belongs
      * @return null if no {@code id} exists with such identifier or if {@code id} is not associated with {@code exerciseId}
      */
-    Approach findById(int id, int exerciseId);
+    Approach findById(int id, int exerciseId, int userId);
 
     /**
      * Delete approach with specified identifier
@@ -33,11 +33,11 @@ public interface ApproachRepository {
      * @param exerciseId unique identifier of {@link ua.kruart.workout.model.Exercise} instance to which {@link Approach} belongs
      * @return false if not found
      */
-    boolean delete(int id, int exerciseId);
+    boolean delete(int id, int exerciseId, int userId);
 
     /**
      * Returns list of the {@link Approach} objects
      * @return
      */
-    List<Approach> findAll(int exerciseId);
+    List<Approach> findAll(int exerciseId, int userId);
 }

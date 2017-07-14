@@ -8,7 +8,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ua.kruart.workout.model.*;
+import ua.kruart.workout.model.Exercise;
+import ua.kruart.workout.model.ExerciseConfiguration;
+import ua.kruart.workout.model.ExerciseDescription;
+import ua.kruart.workout.model.Muscle;
 import ua.kruart.workout.util.exception.InvalidParameterException;
 
 import java.util.HashMap;
@@ -16,6 +19,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static ua.kruart.workout.UserTestData.USER;
 
 /**
  * Verifies functionality of {@link ExerciseServiceImpl} class
@@ -37,56 +41,56 @@ public class ExerciseServiceImplTest {
 
     @Test
     public void testSave() {
-        int sizeBeforeSave = service.getAll(WORKOUT_CORRECT_ID).size();
-        Exercise testData = service.save(getTestData(), WORKOUT_CORRECT_ID);
-        Exercise savedEx = service.get(testData.getId(), WORKOUT_CORRECT_ID);
+        int sizeBeforeSave = service.getAll(WORKOUT_CORRECT_ID, USER.getId()).size();
+        Exercise testData = service.save(getTestData(), WORKOUT_CORRECT_ID, USER.getId());
+        Exercise savedEx = service.get(testData.getId(), WORKOUT_CORRECT_ID, USER.getId());
         assertEquals(testData, savedEx);
         assertEquals(testData.getDescription().getName(), savedEx.getDescription().getName());
-        assertNotEquals(sizeBeforeSave, service.getAll(WORKOUT_CORRECT_ID).size());
+        assertNotEquals(sizeBeforeSave, service.getAll(WORKOUT_CORRECT_ID, USER.getId()).size());
     }
 
     @Test
     public void testUpdateSuccess() {
-        Exercise testData = service.get(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID);
+        Exercise testData = service.get(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID, USER.getId());
         testData.setComment("UPDATE");
-        service.update(testData, WORKOUT_CORRECT_ID);
-        assertEquals(testData.getComment(), service.get(testData.getId(), WORKOUT_CORRECT_ID).getComment());
+        service.update(testData, WORKOUT_CORRECT_ID, USER.getId());
+        assertEquals(testData.getComment(), service.get(testData.getId(), WORKOUT_CORRECT_ID, USER.getId()).getComment());
     }
 
     @Test(expected = InvalidParameterException.class)
     public void testUpdateFailure() {
-        Exercise testData = service.get(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID);
+        Exercise testData = service.get(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID, USER.getId());
         testData.setComment("UPDATE");
-        service.update(testData, WORKOUT_INCORRECT_ID);
+        service.update(testData, WORKOUT_INCORRECT_ID, USER.getId());
     }
 
     @Test
     public void testDeleteSuccess() throws Exception {
-        assertEquals("Size of list: 3", 3, service.getAll(WORKOUT_CORRECT_ID).size());
-        service.delete(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID);
-        assertEquals("Size of list after delete: 2", 2, service.getAll(WORKOUT_CORRECT_ID).size());
+        assertEquals("Size of list: 3", 3, service.getAll(WORKOUT_CORRECT_ID, USER.getId()).size());
+        service.delete(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID, USER.getId());
+        assertEquals("Size of list after delete: 2", 2, service.getAll(WORKOUT_CORRECT_ID, USER.getId()).size());
     }
 
     @Test(expected = InvalidParameterException.class)
     public void testDeleteFailure() throws Exception {
-        service.delete(EXERCISE_INCORRECT_ID, WORKOUT_CORRECT_ID); //non-existing ID
+        service.delete(EXERCISE_INCORRECT_ID, WORKOUT_CORRECT_ID, USER.getId()); //non-existing ID
     }
 
     @Test
     public void testGetSuccess() throws Exception {
-        Exercise exercise = service.get(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID);
+        Exercise exercise = service.get(EXERCISE_CORRECT_ID, WORKOUT_CORRECT_ID, USER.getId());
         assertEquals((Integer) EXERCISE_CORRECT_ID, exercise.getId());
         assertEquals("Розводка гантель", exercise.getDescription().getName());
     }
 
     @Test(expected = InvalidParameterException.class)
     public void testGetFailure() throws Exception {
-        Exercise exercise = service.get(EXERCISE_INCORRECT_ID, WORKOUT_CORRECT_ID);
+        Exercise exercise = service.get(EXERCISE_INCORRECT_ID, WORKOUT_CORRECT_ID, USER.getId());
     }
 
     @Test
     public void testGetAll() throws Exception {
-        assertEquals(3, service.getAll(WORKOUT_CORRECT_ID).size());
+        assertEquals(3, service.getAll(WORKOUT_CORRECT_ID, USER.getId()).size());
     }
 
     public Exercise getTestData() {

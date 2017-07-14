@@ -21,31 +21,31 @@ public class ExerciseServiceImpl implements ExerciseService {
     private ExerciseRepository repository;
 
     @Override
-    public Exercise save(Exercise exercise, int workoutId) {
-        Checks.checkParameter(repository.save(exercise, workoutId), workoutId);
+    public Exercise save(Exercise exercise, int workoutId, int userId) {
+        Checks.checkParameter(repository.save(exercise, workoutId, userId), workoutId);
         return exercise;
     }
 
     @Override
-    public void update(Exercise exercise, int workoutId) throws InvalidParameterException {
-        Checks.checkParameter(repository.save(exercise, workoutId), exercise.getId());
+    public void update(Exercise exercise, int workoutId, int userId) throws InvalidParameterException {
+        Checks.checkParameter(repository.save(exercise, workoutId, userId), exercise.getId());
     }
 
     @Override
-    public void delete(int id, int workoutId) throws InvalidParameterException {
-        Checks.checkParameter(repository.delete(id, workoutId), id);
+    public void delete(int id, int workoutId, int userId) throws InvalidParameterException {
+        Checks.checkParameter(repository.delete(id, workoutId, userId), id);
     }
 
     @Override
-    public Exercise get(int id, int workoutId) throws InvalidParameterException {
-        Exercise byId = repository.findById(id, workoutId);
+    public Exercise get(int id, int workoutId, int userId) throws InvalidParameterException {
+        Exercise byId = repository.findById(id, workoutId, userId);
         Checks.checkParameter(byId, id);
         return byId;
     }
 
     @Override
-    public List<Exercise> getAll(int workoutId) {
-        List<Exercise> exerciseList = repository.findAll(workoutId);
+    public List<Exercise> getAll(int workoutId, int userId) {
+        List<Exercise> exerciseList = repository.findAll(workoutId, userId);
         Checks.checkParameter(exerciseList != null, workoutId);
         return exerciseList;
     }

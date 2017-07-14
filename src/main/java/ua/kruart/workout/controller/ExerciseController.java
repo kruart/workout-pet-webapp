@@ -6,7 +6,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ua.kruart.workout.model.*;
+import ua.kruart.workout.model.Exercise;
+import ua.kruart.workout.model.ExerciseConfiguration;
+import ua.kruart.workout.model.ExerciseDescription;
+import ua.kruart.workout.model.Muscle;
 import ua.kruart.workout.service.ExerciseService;
 import ua.kruart.workout.util.Checks;
 
@@ -15,6 +18,8 @@ import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import static ua.kruart.workout.security.AuthorizedUser.getAuthUserId;
 
 /**
  * Handles exercise-related requests
@@ -30,12 +35,12 @@ public class ExerciseController {
 
     @GetMapping(value = "/all/workout/{wid}")
     public ModelAndView getAllExercise(@PathVariable("wid") Integer workoutId) {
-        return new ModelAndView("exerciseList", "exerciseList", service.getAll(workoutId)).addObject("wid", workoutId);
+        return new ModelAndView("exerciseList", "exerciseList", service.getAll(workoutId, getAuthUserId())).addObject("wid", workoutId);
     }
 
     @RequestMapping(value = "/delete/{id}/workout/{wid}", method = RequestMethod.GET)
     public String removeExercise(@PathVariable Integer id, @PathVariable("wid") Integer workoutId) {
-        service.delete(id, workoutId);
+        service.delete(id, workoutId, getAuthUserId());
         return "redirect:/exercise/all/workout/" + workoutId;
     }
 
@@ -49,7 +54,7 @@ public class ExerciseController {
     @RequestMapping(value = "/update/{id}/workout/{wid}", method = RequestMethod.GET)
     public ModelAndView updateExercise(@PathVariable Integer id, @PathVariable("wid") Integer workoutId) {
         return new ModelAndView("editExercise")
-                .addObject("exerciseModel", service.get(id, workoutId)).addObject("wid", workoutId);
+                .addObject("exerciseModel", service.get(id, workoutId, getAuthUserId())).addObject("wid", workoutId);
     }
 
     @RequestMapping(value = "/saveChanges/workout/{wid}", method = RequestMethod.POST)
@@ -63,9 +68,9 @@ public class ExerciseController {
         exerciseModel.getDescription().setMuscles(getMusclesMapFromReq(req));
 
         if (exerciseModel.isNew()) {
-            service.save(exerciseModel, workoutId);
+            service.save(exerciseModel, workoutId, getAuthUserId());
         } else {
-            service.update(exerciseModel, workoutId);
+            service.update(exerciseModel, workoutId, getAuthUserId());
         }
         return "redirect:/exercise/all/workout/" + workoutId;
     }

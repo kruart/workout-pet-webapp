@@ -8,7 +8,6 @@ import ua.kruart.workout.model.Exercise;
 import ua.kruart.workout.model.Workout;
 import ua.kruart.workout.repository.ExerciseRepository;
 import ua.kruart.workout.repository.WorkoutRepository;
-import ua.kruart.workout.security.AuthorizedUser;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,10 +29,10 @@ public class JpaExerciseRepository implements ExerciseRepository {
 
     @Override
     @Transactional
-    public Exercise save(Exercise exercise, int workoutId) {
+    public Exercise save(Exercise exercise, int workoutId, int userId) {
         Workout workoutRef = entityManager.getReference(Workout.class, workoutId);
         exercise.setWorkout(workoutRef);
-        if(!isWorkoutBelongsToUser(workoutId)) {
+        if(!isWorkoutBelongsToUser(workoutId, userId)) {
             return null;    //if not return null
         }
 
@@ -41,44 +40,44 @@ public class JpaExerciseRepository implements ExerciseRepository {
             entityManager.persist(exercise);
             return exercise;
         } else {
-            return findById(exercise.getId(), workoutId) == null ? null : entityManager.merge(exercise);
+            return findById(exercise.getId(), workoutId, userId) == null ? null : entityManager.merge(exercise);
         }
     }
 
     @Override
-    public Exercise findById(int id, int workoutId) {
+    public Exercise findById(int id, int workoutId, int userId) {
         List<Exercise> exerciseList = entityManager.createNamedQuery("Exercise.findById", Exercise.class)
                 .setParameter("id", id)
                 .setParameter("workoutId", workoutId)
-                .setParameter("userId", AuthorizedUser.getAuthUserId())
+                .setParameter("userId", userId)
                 .getResultList();
         return DataAccessUtils.singleResult(exerciseList);
     }
 
     @Override
     @Transactional
-    public boolean delete(int id, int workoutId) {
-        Exercise exercise = findById(id, workoutId);
-        return entityManager.createNamedQuery("Exercise.delete")
-                .setParameter("id", exercise.getId())
-                .setParameter("workoutId", exercise.getWorkout().getId())
-                .executeUpdate() != 0;
+    public boolean delete(int id, int workoutId, int userId) {
+        return findById(id, workoutId, userId) != null &&
+                entityManager.createNamedQuery("Exercise.delete")
+                        .setParameter("id", id)
+                        .setParameter("workoutId", workoutId)
+                        .executeUpdate() != 0;
     }
 
     @Override
-    public List<Exercise> findAll(int workoutId) {
-        if (!isWorkoutBelongsToUser(workoutId)) {
+    public List<Exercise> findAll(int workoutId, int userId) {
+        if (!isWorkoutBelongsToUser(workoutId, userId)) {
             return null;    //if not return null
         }
 
         return entityManager.createNamedQuery("Exercise.findAll", Exercise.class)
-                .setParameter("userId", AuthorizedUser.getAuthUserId())
+                .setParameter("userId", userId)
                 .setParameter("workoutId", workoutId)
                 .getResultList();
 
     }
 
-    private boolean isWorkoutBelongsToUser(int workoutId) {
-        return workoutRepo.findById(workoutId, AuthorizedUser.getAuthUserId()) != null;
+    private boolean isWorkoutBelongsToUser(int workoutId, int userId) {
+        return workoutRepo.findById(workoutId, userId) != null;
     }
 }

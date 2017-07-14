@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ua.kruart.workout.model.Exercise;
 import ua.kruart.workout.service.ExerciseService;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static ua.kruart.workout.UserTestData.USER;
 
 /**
  * Verifies functionality of {@link ExerciseController} class
@@ -22,17 +24,18 @@ public class ExerciseControllerTest extends AbstractControllerTest {
 
     @Test
     public void getAllExercise() throws Exception{
-        mockMvc.perform(get("/exercise/all/workout/1"))
+//        authorize(USER);
+        mockMvc.perform(get("/exercise/all/workout/4").with(userAuth(USER)))
                 .andDo(print())
-                .andExpect(status().isOk())
                 .andExpect(view().name("exerciseList"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/exerciseList.jsp"))
-                .andExpect(model().attribute("exerciseList", service.getAll(1)));
+                .andExpect(model().attribute("exerciseList", service.getAll(4, USER.getId())))
+                .andExpect(model().attribute("wid", 4));
     }
 
     @Test
     public void testCreateExercise() throws Exception {
-        mockMvc.perform(get("/exercise/create/workout/1"))
+        mockMvc.perform(get("/exercise/create/workout/4").with(userAuth(USER)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("editExercise"))
@@ -42,18 +45,19 @@ public class ExerciseControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdateExercise() throws Exception{
-        mockMvc.perform(get("/exercise/update/3/workout/1"))
+        mockMvc.perform(get("/exercise/update/11/workout/4").with(userAuth(USER)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("editExercise"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/editExercise.jsp"))
-                .andExpect(model().attribute("exerciseModel", service.get(3, 1)));
+                .andExpect(model().attribute("exerciseModel", service.get(11, 4, USER.getId())));
     }
 
     @Test
     public void testCreateOrUpdateExercise() throws Exception {
-        mockMvc.perform(post("/exercise/saveChanges/workout/1").param("id", "3")
-                .param("wid", "1")
+        mockMvc.perform(post("/exercise/saveChanges/workout/4").with(userAuth(USER)).with(csrf())
+                .param("id", "11")
+                .param("wid", "4")
                 .param("conf.weightMeasure", "true")
                 .param("conf.timeMeasure", "false")
                 .param("conf.repeatMeasure", "true")
@@ -67,16 +71,16 @@ public class ExerciseControllerTest extends AbstractControllerTest {
                 .param("optional", "SHOULDERS"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/exercise/all/workout/1"))
-                .andExpect(redirectedUrl("/exercise/all/workout/1"));
+                .andExpect(view().name("redirect:/exercise/all/workout/4"))
+                .andExpect(redirectedUrl("/exercise/all/workout/4"));
     }
 
     @Test
     public void testRemoveExercise() throws Exception {
-        mockMvc.perform(get("/exercise/delete/3/workout/1"))
+        mockMvc.perform(get("/exercise/delete/11/workout/4").with(userAuth(USER)))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/exercise/all/workout/1"))
-                .andExpect(redirectedUrl("/exercise/all/workout/1"));
+                .andExpect(view().name("redirect:/exercise/all/workout/4"))
+                .andExpect(redirectedUrl("/exercise/all/workout/4"));
     }
 }

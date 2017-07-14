@@ -22,7 +22,7 @@ import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
  */
 @Controller
 @RequestMapping("/oauth/github")
-public class Oauth2GithubController extends AbstractOauth2Controller {
+public class GithubOauth2Controller extends AbstractOauth2Controller {
 
     @Autowired
     @Qualifier(value = "oauth2GithubData")
