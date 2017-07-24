@@ -8,6 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import ua.kruart.workout.config.ApplicationConfig;
+import ua.kruart.workout.config.DatabaseConfig;
 import ua.kruart.workout.model.Workout;
 import ua.kruart.workout.util.exception.InvalidParameterException;
 
@@ -21,7 +23,7 @@ import static org.junit.Assert.assertEquals;
  * @author kruart on 27.05.2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
+@ContextConfiguration(classes = {ApplicationConfig.class, DatabaseConfig.class})
 @ActiveProfiles("hsqldb")
 @Sql(scripts = "classpath:sql/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class WorkoutServiceImplTest {
