@@ -4,6 +4,13 @@
 	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
+    <!-- Configure ContextLoaderListener to use AnnotationConfigWebApplicationContext
+       instead of the default XmlWebApplicationContext -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+
     <context-param>
         <param-name>spring.profiles.default</param-name>
         <param-value>postgres</param-value>
@@ -11,9 +18,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:spring/spring-security.xml
-            classpath:spring/spring-app.xml
-            classpath:spring/spring-db.xml
+            ua.kruart.workout.config.ApplicationConfig
         </param-value>
     </context-param>
 
