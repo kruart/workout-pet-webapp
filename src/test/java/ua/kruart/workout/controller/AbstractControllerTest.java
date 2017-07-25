@@ -16,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import ua.kruart.workout.config.ApplicationConfig;
 import ua.kruart.workout.config.DatabaseConfig;
+import ua.kruart.workout.config.SecurityConfig;
 import ua.kruart.workout.config.WebConfig;
 import ua.kruart.workout.model.User;
 
@@ -28,7 +29,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
  *
  * Created by kruart on 25.06.2017.
  */
-@ContextConfiguration(classes = {ApplicationConfig.class, DatabaseConfig.class, WebConfig.class})
+@ContextConfiguration(classes = {ApplicationConfig.class, DatabaseConfig.class, SecurityConfig.class, WebConfig.class})
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("hsqldb")

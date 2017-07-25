@@ -2,7 +2,6 @@ package ua.kruart.workout.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 /**
  * Contains spring configuration for scanning packages and creating beans
@@ -11,5 +10,4 @@ import org.springframework.context.annotation.ImportResource;
  */
 @Configuration
 @ComponentScan(basePackages = "ua.kruart.**.service")
-@ImportResource("classpath:spring/spring-security.xml")
 public class ApplicationConfig {}

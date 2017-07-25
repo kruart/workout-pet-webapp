@@ -20,6 +20,7 @@
         <param-value>
             ua.kruart.workout.config.ApplicationConfig
             ua.kruart.workout.config.DatabaseConfig
+            ua.kruart.workout.config.SecurityConfig
         </param-value>
     </context-param>
 
