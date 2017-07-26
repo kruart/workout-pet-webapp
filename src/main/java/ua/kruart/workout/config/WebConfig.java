@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.Locale;
 
 /**
+ * Contains configuration for working with tier of web controllers
+ *
  * Created by kruart on 25.07.2017.
  */
 @Configuration

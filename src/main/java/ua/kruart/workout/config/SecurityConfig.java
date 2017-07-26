@@ -18,6 +18,8 @@ import ua.kruart.workout.controller.oauth.Oauth2Data;
 import ua.kruart.workout.util.PasswordUtil;
 
 /**
+ * Contains configuration for working with security
+ *
  * Created by kruart on 25.07.2017.
  */
 @Configuration

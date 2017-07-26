@@ -31,6 +31,7 @@ import java.util.Properties;
 @Configuration
 public class DatabaseConfig {
 
+    /**Properties that are required to configure the data source*/
     @Value("${jdbc.driverClassName}")
     private String driverClassName;
     @Value("${jdbc.url}")
@@ -39,12 +40,18 @@ public class DatabaseConfig {
     private String name;
     @Value("${jdbc.password}")
     private String password;
+
+    /**True sql scripts will be executed, false won't be*/
     @Value("${database.init}")
     private Boolean isInit;
+
+    /**Resources that contain the path to sql scripts*/
     @Value("classpath:sql/${jdbc.initLocation}")
     private Resource initLocation;
     @Value("classpath:sql/populateDB.sql")
     private Resource dbPopulateSqlScript;
+
+    /**Hibernate properties*/
     @Value("${jpa.showSql}")
     private Boolean showSql;
     @Value("${hibernate.format_sql}")
@@ -52,6 +59,7 @@ public class DatabaseConfig {
     @Value("${hibernate.use_sql_comments}")
     private Boolean useSqlComments;
 
+    /**Profile which is used in production*/
     @Bean
     @Profile("postgres")
     public static PropertySourcesPlaceholderConfigurer developmentPropertyPlaceholderConfigurer() {
@@ -61,6 +69,7 @@ public class DatabaseConfig {
         return configurer;
     }
 
+    /**Profile which is used for testing*/
     @Bean
     @Profile("hsqldb")
     public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
@@ -79,7 +88,6 @@ public class DatabaseConfig {
         dataSource.setPassword(password);
         return dataSource;
     }
-
 
     @Bean
     public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
@@ -104,7 +112,7 @@ public class DatabaseConfig {
         emf.setPackagesToScan("ua.kruart.workout.model");
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(Boolean.valueOf(showSql));
+        vendorAdapter.setShowSql(showSql);
         emf.setJpaVendorAdapter(vendorAdapter);
 
         Properties jpaProperties = new Properties();
